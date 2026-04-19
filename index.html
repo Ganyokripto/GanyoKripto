@@ -3,61 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GanyoKripto | Place Order</title>
+    <title>GanyoKripto - Fast Data & DeFi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --primary: #0056b3; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .order-container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        h2 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; }
-        .form-group { margin-bottom: 1.2rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #555; }
-        input, select { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
-        .btn { width: 100%; background: var(--primary); color: white; padding: 1rem; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background: #004494; }
-        .footer-text { text-align: center; font-size: 0.8rem; color: #888; margin-top: 1rem; }
+        :root { --primary: #0056b3; --bg: #f8f9fa; --text: #333; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; }
+        header { background: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .hero { background: linear-gradient(135deg, var(--primary), #00a8ff); color: white; padding: 5rem 5%; text-align: center; }
+        .hero h1 { margin: 0; font-size: 2.8rem; }
+        .services { padding: 4rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); }
+        .card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 1.5rem; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 0.9rem 2.5rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 1rem; }
+        .footer { background: #1a1a1a; color: #ddd; text-align: center; padding: 3rem; margin-top: 4rem; }
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo">GanyoKripto</div>
+        <nav>Digital Solutions</nav>
+    </header>
 
-<div class="order-container">
-    <h2>GanyoKripto Order</h2>
-    <!-- To make this functional, we will need to link it to your Google Sheet later -->
-    <form id="orderForm">
-        <div class="form-group">
-            <label>Data Number</label>
-            <input type="text" name="data_number" placeholder="024XXXXXXX" required>
+    <section class="hero">
+        <h1>Fast & Secure Data Bundles</h1>
+        <p>Connecting you to the digital world through reliable DeFi and Data services.</p>
+        <a href="#order" class="btn">Order Now</a>
+    </section>
+
+    <div class="services" id="order">
+        <div class="card">
+            <i class="fas fa-bolt"></i>
+            <h3>Data Bundles</h3>
+            <p>Instant MTN, Telecel, and AirtelTigo bundles at the best rates in Ghana.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform?usp=header" class="btn">Order Data</a>
         </div>
-
-        <div class="form-group">
-            <label>Select Network</label>
-            <select name="network">
-                <option>MTN Ghana</option>
-                <option>Telecel (Vodafone)</option>
-                <option>AirtelTigo</option>
-            </select>
+        <div class="card">
+            <i class="fas fa-ethereum"></i>
+            <h3>DeFi Portal</h3>
+            <p>Secure access to decentralized finance and NFT management tools.</p>
+            <a href="#" class="btn">Connect</a>
         </div>
-
-        <div class="form-group">
-            <label>Select Bundle</label>
-            <select name="bundle">
-                <option>1GB - GH₵ 10</option>
-                <option>2.5GB - GH₵ 20</option>
-                <option>5GB - GH₵ 40</option>
-            </select>
+        <div class="card">
+            <i class="fas fa-network-wired"></i>
+            <h3>Networking</h3>
+            <p>Join a community of digital entrepreneurs and grow your network.</p>
+            <a href="#" class="btn">Join Us</a>
         </div>
+    </div>
 
-        <button type="submit" class="btn">Confirm Order</button>
-    </form>
-    <p class="footer-text">Secure Transaction via GanyoKripto DeFi</p>
-</div>
-
-<script>
-    // This script can be connected to your Google Sheet via a Webhook
-    document.getElementById('orderForm').onsubmit = function(e) {
-        e.preventDefault();
-        alert("Order Recorded! (Connecting to Sheet...)");
-    };
-</script>
-
+    <div class="footer">
+        <p>&copy; 2026 GanyoKripto. Leading the Digital Future.</p>
+        <p>Email: info@ganyokripto.com | Powered by GanyoKripto Digital</p>
+    </div>
 </body>
 </html>
