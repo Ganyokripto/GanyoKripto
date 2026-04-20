@@ -26,27 +26,27 @@
         .vboost-box h2 { color: var(--accent); margin: 0; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1px; }
         #timer { font-size: 2.2rem; font-weight: 900; color: white; margin: 10px 0; font-family: monospace; }
 
-        /* SCRAMBLE GAME SECTION */
-        #game-section { padding: 2rem 1.5rem; text-align: center; background: #fff; border-radius: 20px; margin: 20px 5%; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        #game-section h2 { color: var(--primary); margin-top: 0; }
-        .scrambled-word { font-size: 2.5rem; font-weight: 900; letter-spacing: 5px; color: var(--primary); margin: 15px 0; text-transform: uppercase; background: #f0f0f0; padding: 10px; border-radius: 10px; }
-        .hint { font-style: italic; color: #666; margin-bottom: 20px; display: block; }
-        input[type="text"] { padding: 12px; width: 80%; max-width: 300px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; margin-bottom: 10px; outline: none; text-align: center; }
-        input[type="text"]:focus { border-color: var(--primary); }
-        .game-btns { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
-        .check-btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
-        .next-btn { background: #6c757d; color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        /* GAMES SECTION */
+        .game-container { padding: 2rem 1.5rem; text-align: center; background: #fff; border-radius: 20px; margin: 20px 5%; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .game-container h2 { color: var(--primary); margin-top: 0; font-size: 1.5rem; }
+        .scrambled-word { font-size: 2rem; font-weight: 900; letter-spacing: 3px; color: var(--primary); margin: 15px 0; text-transform: uppercase; background: #f0f0f0; padding: 10px; border-radius: 10px; }
+        .hint { font-style: italic; color: #666; margin-bottom: 20px; display: block; font-size: 0.9rem; }
+        
+        input[type="text"] { padding: 12px; width: 85%; max-width: 300px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; margin-bottom: 10px; outline: none; text-align: center; }
+        .game-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .check-btn { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .next-btn { background: #6c757d; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+
+        /* FLASHCARD GAME */
+        .flashcard { background: var(--primary); color: white; padding: 30px; border-radius: 15px; margin: 20px auto; cursor: pointer; transition: 0.6s; transform-style: preserve-3d; width: 80%; max-width: 300px; min-height: 100px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
 
         .services { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .card { background: var(--card-bg); padding: 2.5rem 1.5rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; color: #333; display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-10px); }
-        .card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 1.5rem; }
-        
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: auto; border: none; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .card i { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: auto; border: none; cursor: pointer; }
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
-        .modal-content { background: white; padding: 2rem; border-radius: 20px; width: 85%; max-width: 400px; text-align: center; position: relative; color: #333; }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
+        .modal-content { background: white; padding: 2rem; border-radius: 20px; width: 85%; max-width: 400px; text-align: center; color: #333; }
         
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #ffffff; color: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 10000; text-decoration: none; }
         .footer { background: rgba(0,0,0,0.1); color: white; text-align: center; padding: 3rem 1rem; margin-top: 4rem; }
@@ -71,20 +71,28 @@
         <p style="font-size: 0.8rem; color: #eee; margin: 0;">Days : Hours : Mins : Secs</p>
     </div>
 
-    <!-- LEARN & PLAY SCRAMBLE GAME -->
-    <section id="game-section">
+    <!-- GAME 1: SCRAMBLE -->
+    <section class="game-container">
         <h2>🧠 Crypto Scramble</h2>
         <p>Unscramble the word to test your Crypto knowledge!</p>
-        <div class="scrambled-word" id="scrambledWord">BLOCKCHAIN</div>
-        <span class="hint" id="wordHint">Hint: The technology behind Bitcoin</span>
-        
-        <input type="text" id="userInput" placeholder="Enter word here...">
-        
+        <div class="scrambled-word" id="scrambledWord">---</div>
+        <span class="hint" id="wordHint">Hint: ---</span>
+        <input type="text" id="userInput" placeholder="Your Answer...">
         <div class="game-btns">
-            <button class="check-btn" onclick="checkWord()">Check Answer</button>
-            <button class="next-btn" onclick="initGame()">New Word</button>
+            <button class="check-btn" onclick="checkWord()">Verify</button>
+            <button class="next-btn" onclick="initScramble()">Next Word</button>
         </div>
-        <p id="feedback" style="margin-top: 15px; font-weight: bold;"></p>
+        <p id="feedback" style="margin-top: 10px; font-weight: bold;"></p>
+    </section>
+
+    <!-- GAME 2: FLASHCARDS -->
+    <section class="game-container" style="background: #f9f9f9;">
+        <h2>💡 Crypto Terms Flashcards</h2>
+        <p>Tap the card to reveal the meaning!</p>
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+            HODL
+        </div>
+        <button class="next-btn" onclick="nextCard()">Next Card</button>
     </section>
 
     <!-- SERVICES -->
@@ -96,15 +104,9 @@
             <button class="btn" onclick="showTelcos()">Order Data</button>
         </div>
         <div class="card">
-            <i class="fa-solid fa-chart-line"></i>
-            <h3>Digital DeFi Portal</h3>
-            <p>Access your strategy dashboard and NFT portfolio.</p>
-            <a href="https://tactics-strategy.com" target="_blank" class="btn">Enter Portal</a>
-        </div>
-        <div class="card">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3>Blockchain Academy</h3>
-            <p>Learn everything about Crypto, NFTs, and DeFi.</p>
+            <p>Master Crypto, NFTs, and DeFi strategies.</p>
             <a href="https://v-academy.top" target="_blank" class="btn">Login Academy</a>
         </div>
         <div class="card">
@@ -115,16 +117,16 @@
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- TELCO MODAL -->
     <div id="telcoModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeTelcos()">&times;</span>
             <h2 style="color:var(--primary); margin-top: 0;">Select Network</h2>
-            <div class="telco-list" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-                <div style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">MTN Ghana</div>
-                <div style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">Telecel (Vodafone)</div>
-                <div style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">AirtelTigo</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">MTN Ghana</div>
+                <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">Telecel (Vodafone)</div>
+                <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">AirtelTigo</div>
             </div>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: #999; cursor: pointer;" onclick="closeTelcos()">[ Close Window ]</p>
         </div>
     </div>
 
@@ -135,61 +137,97 @@
     <script>
         // COUNTDOWN
         const targetDate = new Date("May 20, 2026 00:00:00").getTime();
-        setInterval(function() {
+        setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            const d = Math.floor(diff / (86400000));
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
             document.getElementById("timer").innerHTML = `${d}:${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
         }, 1000);
 
-        // SCRAMBLE GAME LOGIC
-        const words = [
-            { word: "BITCOIN", hint: "The first ever cryptocurrency" },
-            { word: "ETHEREUM", hint: "The king of smart contracts and DeFi" },
-            { word: "WALLET", hint: "Where you store your digital assets" },
-            { word: "MINING", hint: "The process of creating new crypto coins" },
-            { word: "SCAM", hint: "Something you must avoid in the crypto space" },
-            { word: "NFT", hint: "Non-fungible token (Digital art/assets)" },
-            { word: "BINANCE", hint: "A popular global crypto exchange" },
-            { word: "GANYOKRIPTO", hint: "The best place to learn digital wealth" }
+        // GAME 1: SCRAMBLE DATA
+        const scrambleWords = [
+            { word: "METAMASK", hint: "A popular crypto wallet browser extension" },
+            { word: "STAKING", hint: "Locking up coins to earn rewards" },
+            { word: "AIRDROP", hint: "Free tokens sent to your wallet" },
+            { word: "SOLIDITY", hint: "Programming language for Smart Contracts" },
+            { word: "GASFEE", hint: "The cost of making a transaction on Ethereum" },
+            { word: "LIQUIDITY", hint: "Pool of funds used for trading on DEXs" },
+            { word: "PHISHING", hint: "Fake links used to steal your seed phrase" },
+            { word: "GANYOKRIPTO", hint: "Our platform for digital wealth" },
+            { word: "WHITELIST", hint: "Early access list for NFT mints" }
         ];
 
-        let correctWord;
-
-        const initGame = () => {
-            let randomObj = words[Math.floor(Math.random() * words.length)];
-            let wordArray = randomObj.word.split("");
-            for (let i = wordArray.length - 1; i > 0; i--) {
+        let currentWord;
+        function initScramble() {
+            let obj = scrambleWords[Math.floor(Math.random() * scrambleWords.length)];
+            let arr = obj.word.split("");
+            for (let i = arr.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
-                [wordArray[i], wordArray[j]] = [wordArray[j], wordArray[i]];
+                [arr[i], arr[j]] = [arr[j], arr[i]];
             }
-            document.getElementById("scrambledWord").innerText = wordArray.join("");
-            document.getElementById("wordHint").innerText = `Hint: ${randomObj.hint}`;
-            correctWord = randomObj.word.toLowerCase();
+            document.getElementById("scrambledWord").innerText = arr.join("");
+            document.getElementById("wordHint").innerText = "Hint: " + obj.hint;
+            currentWord = obj.word.toLowerCase();
             document.getElementById("userInput").value = "";
             document.getElementById("feedback").innerText = "";
         }
 
-        const checkWord = () => {
-            let userWord = document.getElementById("userInput").value.toLowerCase();
-            if(!userWord) return alert("Please enter a word!");
-            if(userWord !== correctWord) {
-                document.getElementById("feedback").innerText = `❌ Oops! "${userWord}" is not correct.`;
-                document.getElementById("feedback").style.color = "red";
-            } else {
-                document.getElementById("feedback").innerText = `✅ Correct! "${correctWord.toUpperCase()}" is the word!`;
+        function checkWord() {
+            let input = document.getElementById("userInput").value.toLowerCase();
+            if(input === currentWord) {
+                document.getElementById("feedback").innerText = "✅ Excellent! Correct.";
                 document.getElementById("feedback").style.color = "green";
+            } else {
+                document.getElementById("feedback").innerText = "❌ Try again!";
+                document.getElementById("feedback").style.color = "red";
             }
         }
 
-        initGame();
+        // GAME 2: FLASHCARDS DATA
+        const flashcards = [
+            { term: "HODL", meaning: "Hold On for Dear Life (Don't sell!)" },
+            { term: "DAO", meaning: "Decentralized Autonomous Organization" },
+            { term: "DEX", meaning: "Decentralized Exchange (like Uniswap)" },
+            { term: "FOMO", meaning: "Fear Of Missing Out" },
+            { term: "WHALE", hint: "Someone with a huge amount of crypto" }
+        ];
+        let cardIdx = 0;
+        let showingMeaning = false;
 
+        function flipCard() {
+            const card = document.getElementById("flashcard");
+            if (!showingMeaning) {
+                card.innerText = flashcards[cardIdx].meaning;
+                card.style.background = "#ffc107";
+                card.style.color = "#333";
+            } else {
+                card.innerText = flashcards[cardIdx].term;
+                card.style.background = "#28a745";
+                card.style.color = "white";
+            }
+            showingMeaning = !showingMeaning;
+        }
+
+        function nextCard() {
+            cardIdx = (cardIdx + 1) % flashcards.length;
+            showingMeaning = false;
+            const card = document.getElementById("flashcard");
+            card.innerText = flashcards[cardIdx].term;
+            card.style.background = "#28a745";
+            card.style.color = "white";
+        }
+
+        // NAVIGATION
         function showTelcos() { document.getElementById('telcoModal').style.display = 'flex'; }
         function closeTelcos() { document.getElementById('telcoModal').style.display = 'none'; }
-        function goToForm() { window.location.href = "https://google.com"; }
+        function goToForm() { 
+            window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform?usp=header"; 
+        }
+
+        initScramble();
     </script>
 
     <div class="footer">
