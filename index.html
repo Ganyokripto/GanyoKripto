@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GanyoKripto | V-Boost Launch</title>
+    <title>GanyoKripto | V-Boost Launch & Miner</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root { 
@@ -14,37 +14,43 @@
             --card-bg: #ffffff;
         }
         
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
         header { background: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
         .motto { color: var(--accent); font-weight: bold; font-size: 0.9rem; }
 
-        .hero { padding: 4rem 5% 2rem; text-align: center; color: white; }
-        .hero h1 { margin: 0; font-size: 2.8rem; font-weight: 900; }
+        .hero { padding: 3rem 5% 1rem; text-align: center; color: white; }
+        .hero h1 { margin: 0; font-size: 2.5rem; font-weight: 900; }
 
-        /* V-BOOST COUNTDOWN BOX */
-        .vboost-box { background: rgba(0,0,0,0.2); margin: 20px auto; padding: 2rem; width: 85%; max-width: 800px; border-radius: 20px; border: 2px solid var(--accent); text-align: center; }
-        .vboost-box h2 { color: var(--accent); margin: 0; text-transform: uppercase; font-size: 1.2rem; }
-        #timer { font-size: 2.5rem; font-weight: 900; color: white; margin: 10px 0; font-family: monospace; }
+        .vboost-box { background: rgba(0,0,0,0.2); margin: 20px auto; padding: 1.5rem; width: 90%; max-width: 800px; border-radius: 20px; border: 2px solid var(--accent); text-align: center; box-sizing: border-box; }
+        .vboost-box h2 { color: var(--accent); margin: 0; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1px; }
+        #timer { font-size: 2.2rem; font-weight: 900; color: white; margin: 10px 0; font-family: monospace; }
+
+        /* GAME SECTION */
+        #game-section { padding: 1.5rem; text-align: center; background: rgba(255,255,255,0.15); border-radius: 20px; margin: 20px 5%; border: 1px solid rgba(255,255,255,0.3); }
+        #game-canvas { height: 200px; position: relative; overflow: hidden; background: #1e7e34; border-radius: 15px; cursor: pointer; border: 2px dashed var(--accent); touch-action: manipulation; }
+        #coin { font-size: 50px; position: absolute; transition: 0.15s; user-select: none; z-index: 10; cursor: pointer; }
+        #score-display { font-size: 2rem; font-weight: bold; margin-top: 65px; color: white; opacity: 0.9; pointer-events: none; }
+        #game-msg { margin-top: 10px; font-weight: bold; min-height: 24px; color: var(--accent); }
 
         .services { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .card { background: var(--card-bg); padding: 2.5rem 1.5rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; color: #333; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-10px); }
         .card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 1.5rem; }
         
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: auto; border: none; cursor: pointer; font-size: 1rem; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: auto; border: none; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .btn:hover { background: #1e7e34; transform: scale(1.05); }
 
-        /* MODAL STYLES */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
-        .modal-content { background: white; padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 450px; text-align: center; position: relative; color: #333; }
+        .modal-content { background: white; padding: 2rem; border-radius: 20px; width: 85%; max-width: 400px; text-align: center; position: relative; color: #333; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
-        .telco-list { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .telco-option { padding: 1rem; border: 2px solid #eee; border-radius: 12px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .telco-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .telco-option { padding: 0.8rem; border: 2px solid #eee; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
+        .telco-option:hover { border-color: var(--primary); background: #f9f9f9; }
         
-        /* Floating WhatsApp Button */
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #ffffff; color: #25d366; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 10000; text-decoration: none; transition: 0.3s; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #ffffff; color: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 10000; text-decoration: none; }
 
-        .footer { background: rgba(0,0,0,0.1); color: white; text-align: center; padding: 3rem; margin-top: 4rem; }
+        .footer { background: rgba(0,0,0,0.1); color: white; text-align: center; padding: 3rem 1rem; margin-top: 4rem; }
         .mtn { color: #ffcc00; } .telecel { color: #e60000; } .airteltigo { color: #003399; }
     </style>
 </head>
@@ -60,48 +66,60 @@
         <p>Data Bundles • DeFi Assets • Blockchain Academy</p>
     </section>
 
-    <!-- V-BOOST COUNTDOWN -->
+    <!-- COUNTDOWN -->
     <div class="vboost-box">
         <h2>🚀 V-BOOST PROJECT LAUNCH</h2>
         <div id="timer">00:00:00:00</div>
         <p style="font-size: 0.8rem; color: #eee; margin: 0;">Days : Hours : Mins : Secs</p>
     </div>
 
+    <!-- GAME SECTION -->
+    <section id="game-section">
+        <h2 style="color: var(--accent); margin-top: 0;">🎮 V-BOOST MINER</h2>
+        <p style="margin-bottom: 15px;">Tap the coin to mine! Reach 50 for a prize.</p>
+        <div id="game-canvas">
+            <div id="coin">🪙</div>
+            <div id="score-display">Score: 0</div>
+        </div>
+        <div id="game-msg">Tap the coin to start!</div>
+    </section>
+
+    <!-- SERVICES -->
     <div class="services" id="order">
         <div class="card">
             <i class="fa-solid fa-bolt"></i>
             <h3>Data Bundles</h3>
-            <p>Cheap MTN, Telecel, and AirtelTigo data bundles.</p>
+            <p>Affordable MTN, Telecel, and AirtelTigo bundles for you.</p>
             <button class="btn" onclick="showTelcos()">Order Data</button>
         </div>
 
         <div class="card">
             <i class="fa-solid fa-chart-line"></i>
             <h3>Digital DeFi Portal</h3>
-            <p>Access your strategy dashboard and NFT portfolio.</p>
-            <a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank" class="btn">Enter Portal</a>
+            <p>Manage your strategy dashboard and NFT assets.</p>
+            <a href="https://tactics-strategy.com" target="_blank" class="btn">Enter Portal</a>
         </div>
 
         <div class="card">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3>Blockchain Academy</h3>
-            <p>Learn everything about Crypto, NFTs, and DeFi.</p>
+            <p>Master Crypto, NFTs, and Decentralized Finance.</p>
             <a href="https://v-academy.top" target="_blank" class="btn">Login Academy</a>
         </div>
 
         <div class="card">
             <i class="fa-solid fa-users"></i>
             <h3>WhatsApp Community</h3>
-            <p>Join thousands of entrepreneurs today.</p>
-            <a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank" class="btn">Join Group</a>
+            <p>Connect with a network of digital entrepreneurs.</p>
+            <a href="https://whatsapp.com" target="_blank" class="btn">Join Group</a>
         </div>
     </div>
 
-    <!-- TELCO MODAL -->
+    <!-- MODAL -->
     <div id="telcoModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeTelcos()">&times;</span>
-            <h2 style="color:var(--primary)">Select Network</h2>
+            <h2 style="color:var(--primary); margin-top: 0;">Select Network</h2>
             <div class="telco-list">
                 <div class="telco-option" onclick="goToForm()"><i class="fa-solid fa-circle mtn"></i> MTN Ghana</div>
                 <div class="telco-option" onclick="goToForm()"><i class="fa-solid fa-circle telecel"></i> Telecel (Vodafone)</div>
@@ -110,13 +128,12 @@
         </div>
     </div>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" class="whatsapp-float" target="_blank">
+    <a href="https://whatsapp.com" class="whatsapp-float" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
     <script>
-        // COUNTDOWN SCRIPT (Target: May 20, 2026)
+        // COUNTDOWN
         const targetDate = new Date("May 20, 2026 00:00:00").getTime();
         setInterval(function() {
             const now = new Date().getTime();
@@ -128,9 +145,48 @@
             document.getElementById("timer").innerHTML = `${d}:${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
         }, 1000);
 
+        // GAME LOGIC
+        let score = 0;
+        const coin = document.getElementById('coin');
+        const canvas = document.getElementById('game-canvas');
+        const scoreDisplay = document.getElementById('score-display');
+        const msg = document.getElementById('game-msg');
+
+        function moveCoin() {
+            const maxX = canvas.clientWidth - 60;
+            const maxY = canvas.clientHeight - 60;
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+            coin.style.left = randomX + 'px';
+            coin.style.top = randomY + 'px';
+        }
+
+        coin.addEventListener('mousedown', handleMine);
+        coin.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            handleMine();
+        });
+
+        function handleMine() {
+            score++;
+            scoreDisplay.innerHTML = `Score: ${score}`;
+            moveCoin();
+            
+            if(score === 10) msg.innerHTML = "🔥 Keep Mining!";
+            if(score === 25) msg.innerHTML = "💎 You're a Whale!";
+            if(score === 50) {
+                msg.innerHTML = "🚀 WINNER! Send a screenshot to WhatsApp for a bonus!";
+                msg.style.color = "#ffffff";
+                msg.style.background = "#000";
+                msg.style.padding = "5px";
+            }
+        }
+        
+        moveCoin(); // Initial position
+
         function showTelcos() { document.getElementById('telcoModal').style.display = 'flex'; }
         function closeTelcos() { document.getElementById('telcoModal').style.display = 'none'; }
-        function goToForm() { window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform?usp=header"; }
+        function goToForm() { window.location.href = "https://google.com"; }
     </script>
 
     <div class="footer">
