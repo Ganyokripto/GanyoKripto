@@ -37,9 +37,6 @@
         .check-btn { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
         .next-btn { background: #6c757d; color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
 
-        /* FLASHCARD GAME */
-        .flashcard { background: var(--primary); color: white; padding: 30px; border-radius: 15px; margin: 20px auto; cursor: pointer; transition: 0.6s; transform-style: preserve-3d; width: 80%; max-width: 300px; min-height: 100px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
-
         .services { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .card { background: var(--card-bg); padding: 2.5rem 1.5rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; color: #333; display: flex; flex-direction: column; }
         .card i { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; }
@@ -71,10 +68,10 @@
         <p style="font-size: 0.8rem; color: #eee; margin: 0;">Days : Hours : Mins : Secs</p>
     </div>
 
-    <!-- GAME 1: SCRAMBLE -->
+    <!-- BRAIN GAMES SECTION -->
     <section class="game-container">
         <h2>🧠 Crypto Scramble</h2>
-        <p>Unscramble the word to test your Crypto knowledge!</p>
+        <p>Unscramble the word to test your knowledge!</p>
         <div class="scrambled-word" id="scrambledWord">---</div>
         <span class="hint" id="wordHint">Hint: ---</span>
         <input type="text" id="userInput" placeholder="Your Answer...">
@@ -85,30 +82,30 @@
         <p id="feedback" style="margin-top: 10px; font-weight: bold;"></p>
     </section>
 
-    <!-- GAME 2: FLASHCARDS -->
-    <section class="game-container" style="background: #f9f9f9;">
-        <h2>💡 Crypto Terms Flashcards</h2>
-        <p>Tap the card to reveal the meaning!</p>
-        <div class="flashcard" id="flashcard" onclick="flipCard()">
-            HODL
-        </div>
-        <button class="next-btn" onclick="nextCard()">Next Card</button>
-    </section>
-
     <!-- SERVICES -->
     <div class="services" id="order">
         <div class="card">
             <i class="fa-solid fa-bolt"></i>
             <h3>Data Bundles</h3>
-            <p>Cheap MTN, Telecel, and AirtelTigo data bundles.</p>
+            <p>Cheap MTN, Telecel, and AirtelTigo bundles.</p>
             <button class="btn" onclick="showTelcos()">Order Data</button>
         </div>
+        
+        <!-- RESTORED TACTICS LINK -->
+        <div class="card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Digital DeFi Portal</h3>
+            <p>Access strategy dashboard and NFT portfolio.</p>
+            <a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank" class="btn">Enter Portal</a>
+        </div>
+
         <div class="card">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3>Blockchain Academy</h3>
             <p>Master Crypto, NFTs, and DeFi strategies.</p>
             <a href="https://v-academy.top" target="_blank" class="btn">Login Academy</a>
         </div>
+
         <div class="card">
             <i class="fa-solid fa-users"></i>
             <h3>WhatsApp Community</h3>
@@ -117,7 +114,7 @@
         </div>
     </div>
 
-    <!-- TELCO MODAL -->
+    <!-- TELCO MODAL WITH GOOGLE FORM -->
     <div id="telcoModal" class="modal">
         <div class="modal-content">
             <h2 style="color:var(--primary); margin-top: 0;">Select Network</h2>
@@ -147,17 +144,18 @@
             document.getElementById("timer").innerHTML = `${d}:${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
         }, 1000);
 
-        // GAME 1: SCRAMBLE DATA
+        // EXPANDED SCRAMBLE DATA
         const scrambleWords = [
             { word: "METAMASK", hint: "A popular crypto wallet browser extension" },
             { word: "STAKING", hint: "Locking up coins to earn rewards" },
             { word: "AIRDROP", hint: "Free tokens sent to your wallet" },
             { word: "SOLIDITY", hint: "Programming language for Smart Contracts" },
-            { word: "GASFEE", hint: "The cost of making a transaction on Ethereum" },
-            { word: "LIQUIDITY", hint: "Pool of funds used for trading on DEXs" },
-            { word: "PHISHING", hint: "Fake links used to steal your seed phrase" },
-            { word: "GANYOKRIPTO", hint: "Our platform for digital wealth" },
-            { word: "WHITELIST", hint: "Early access list for NFT mints" }
+            { word: "GASFEE", hint: "The cost of making a transaction" },
+            { word: "LIQUIDITY", hint: "Pool of funds used for trading" },
+            { word: "WHITELIST", hint: "Early access list for NFT mints" },
+            { word: "STABLECOIN", hint: "Crypto pegged to a currency like USD" },
+            { word: "HODL", hint: "Hold on for dear life" },
+            { word: "GANYOKRIPTO", hint: "Your #1 knowledge source" }
         ];
 
         let currentWord;
@@ -184,40 +182,6 @@
                 document.getElementById("feedback").innerText = "❌ Try again!";
                 document.getElementById("feedback").style.color = "red";
             }
-        }
-
-        // GAME 2: FLASHCARDS DATA
-        const flashcards = [
-            { term: "HODL", meaning: "Hold On for Dear Life (Don't sell!)" },
-            { term: "DAO", meaning: "Decentralized Autonomous Organization" },
-            { term: "DEX", meaning: "Decentralized Exchange (like Uniswap)" },
-            { term: "FOMO", meaning: "Fear Of Missing Out" },
-            { term: "WHALE", hint: "Someone with a huge amount of crypto" }
-        ];
-        let cardIdx = 0;
-        let showingMeaning = false;
-
-        function flipCard() {
-            const card = document.getElementById("flashcard");
-            if (!showingMeaning) {
-                card.innerText = flashcards[cardIdx].meaning;
-                card.style.background = "#ffc107";
-                card.style.color = "#333";
-            } else {
-                card.innerText = flashcards[cardIdx].term;
-                card.style.background = "#28a745";
-                card.style.color = "white";
-            }
-            showingMeaning = !showingMeaning;
-        }
-
-        function nextCard() {
-            cardIdx = (cardIdx + 1) % flashcards.length;
-            showingMeaning = false;
-            const card = document.getElementById("flashcard");
-            card.innerText = flashcards[cardIdx].term;
-            card.style.background = "#28a745";
-            card.style.color = "white";
         }
 
         // NAVIGATION
