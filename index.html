@@ -13,20 +13,20 @@
     --primary: #28a745;
     --accent: #ffc107;
     --bg: #0f172a;
-    --text: #ffffff;
+    --card: #ffffff;
 }
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: var(--bg);
-    color: var(--text);
+    color: white;
 }
 
 header {
-    background: #fff;
-    color: #000;
-    padding: 1rem;
+    background: white;
+    color: black;
+    padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
 }
@@ -38,59 +38,58 @@ header {
 
 .hero {
     text-align: center;
-    padding: 2rem;
+    padding: 3rem 1rem;
 }
 
 .hero h1 {
-    font-size: 2rem;
+    font-size: 2.3rem;
+}
+
+.cta {
+    margin-top: 20px;
 }
 
 .btn {
     background: var(--primary);
     color: white;
-    padding: 12px 20px;
+    padding: 12px 22px;
+    border-radius: 8px;
     border: none;
-    border-radius: 10px;
     cursor: pointer;
 }
 
-.section {
+.timer-box {
+    text-align: center;
+    padding: 1rem;
+    border: 2px solid var(--accent);
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.services {
+    display: grid;
+    gap: 20px;
     padding: 2rem;
 }
 
 .card {
-    background: white;
+    background: var(--card);
     color: black;
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.game-box {
-    background: #111;
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
 }
 
-.scramble {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 10px 0;
+.game-section {
+    padding: 2rem;
 }
 
-.flashcard {
-    background: var(--primary);
-    padding: 20px;
+.game-box {
+    background: #111;
+    padding: 1rem;
     border-radius: 10px;
-    cursor: pointer;
-}
-
-.quiz-btn {
-    margin: 5px;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .whatsapp {
@@ -114,67 +113,70 @@ header {
 </header>
 
 <section class="hero">
-<h1>Your Digital Hub</h1>
+<h1>Your Digital Platform</h1>
 <p>Data • Connectivity • Crypto • Learning</p>
 
+<div class="cta">
 <a href="https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform">
 <button class="btn">Order Data Now</button>
 </a>
+</div>
 </section>
 
-<section class="section">
-<h2>Our Services</h2>
+<div class="timer-box">
+<h3>🚀 V-BOOST Launch</h3>
+<div id="timer">00:00:00</div>
+</div>
+
+<section class="services">
 
 <div class="card">
 <h3>⚡ Data Bundles</h3>
-<p>Fast and affordable data delivered instantly.</p>
+<p>Fast and affordable delivery.</p>
+<button class="btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSerY-T57z-LzSI2yCQ2Z-NbHC1E6oe5tdWG2DQzeYxyPtRg1A/viewform'">Order</button>
 </div>
 
 <div class="card">
 <h3>📊 DeFi Portal</h3>
-<p>Access digital earning opportunities.</p>
+<p>Explore digital earning systems.</p>
+<a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank">
+<button class="btn">Enter</button>
+</a>
 </div>
 
 <div class="card">
 <h3>🎓 Blockchain Academy</h3>
-<p>Learn crypto and digital finance.</p>
+<p>Learn crypto step by step.</p>
+<a href="https://v-academy.top" target="_blank">
+<button class="btn">Access</button>
+</a>
+</div>
+
+<div class="card">
+<h3>👥 Community</h3>
+<p>Join our WhatsApp network.</p>
+<a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank">
+<button class="btn">Join</button>
+</a>
 </div>
 
 </section>
 
-<section class="section">
+<section class="game-section">
+
 <h2>🧠 Crypto Game Zone</h2>
 
-<!-- SCRAMBLE -->
 <div class="game-box">
-<h3>Word Scramble</h3>
-<div class="scramble" id="scrambleWord"></div>
-<input type="text" id="answer">
-<br><br>
-<button class="btn" onclick="checkScramble()">Check</button>
-<p id="scrambleResult"></p>
+<h3>Scramble</h3>
+<div id="word"></div>
+<input id="input">
+<button onclick="check()">Check</button>
+<p id="res"></p>
 </div>
 
-<br>
-
-<!-- FLASHCARD -->
 <div class="game-box">
-<h3>Tap to Reveal</h3>
-<div class="flashcard" id="card" onclick="flip()">HODL</div>
-</div>
-
-<br>
-
-<!-- QUIZ -->
-<div class="game-box">
-<h3>Quick Quiz</h3>
-<p id="question"></p>
-
-<button class="quiz-btn" onclick="answer(0)" id="a"></button>
-<button class="quiz-btn" onclick="answer(1)" id="b"></button>
-<button class="quiz-btn" onclick="answer(2)" id="c"></button>
-
-<p id="quizResult"></p>
+<h3>Tap Reveal</h3>
+<div id="card" onclick="flip()">HODL</div>
 </div>
 
 </section>
@@ -185,77 +187,49 @@ header {
 
 <script>
 
+// TIMER
+const target = new Date("May 20, 2026").getTime();
+
+setInterval(()=>{
+let now = new Date().getTime();
+let diff = target - now;
+
+if(diff<0){document.getElementById("timer").innerHTML="LIVE";return;}
+
+let h = Math.floor(diff/3600000);
+let m = Math.floor((diff%3600000)/60000);
+let s = Math.floor((diff%60000)/1000);
+
+document.getElementById("timer").innerHTML = h+":"+m+":"+s;
+},1000);
+
 // SCRAMBLE
-let words = ["BLOCKCHAIN", "NFT", "BITCOIN", "WALLET"];
-let current = "";
+let words=["BTC","NFT","ETH","BLOCK"];
+let current="";
 
-function newScramble() {
-    current = words[Math.floor(Math.random()*words.length)];
-    let scrambled = current.split('').sort(()=>0.5-Math.random()).join('');
-    document.getElementById("scrambleWord").innerText = scrambled;
+function newWord(){
+current=words[Math.floor(Math.random()*words.length)];
+document.getElementById("word").innerHTML=current.split('').sort(()=>0.5-Math.random()).join('');
 }
 
-function checkScramble() {
-    let ans = document.getElementById("answer").value.toUpperCase();
-    if(ans === current){
-        document.getElementById("scrambleResult").innerText = "Correct!";
-        newScramble();
-    } else {
-        document.getElementById("scrambleResult").innerText = "Try again!";
-    }
+function check(){
+if(document.getElementById("input").value.toUpperCase()==current){
+document.getElementById("res").innerHTML="Correct";
+newWord();
+}else{
+document.getElementById("res").innerHTML="Try again";
+}
 }
 
-newScramble();
-
+newWord();
 
 // FLASHCARD
-let flipped = false;
+let show=false;
 function flip(){
-    let card = document.getElementById("card");
-    if(!flipped){
-        card.innerText = "Hold your crypto long term";
-    } else {
-        card.innerText = "HODL";
-    }
-    flipped = !flipped;
+let c=document.getElementById("card");
+c.innerHTML = show ? "HODL" : "Hold long term";
+show=!show;
 }
-
-
-// QUIZ
-let quiz = [
-{
-q: "What is BTC?",
-a: ["Bank Token", "Bitcoin", "Bonus Coin"],
-correct: 1
-},
-{
-q: "NFT means?",
-a: ["Non-Fungible Token", "New Finance Tech", "Next Fund Trade"],
-correct: 0
-}
-];
-
-let qIndex = 0;
-
-function loadQuiz(){
-    let q = quiz[qIndex];
-    document.getElementById("question").innerText = q.q;
-    document.getElementById("a").innerText = q.a[0];
-    document.getElementById("b").innerText = q.a[1];
-    document.getElementById("c").innerText = q.a[2];
-}
-
-function answer(i){
-    if(i === quiz[qIndex].correct){
-        document.getElementById("quizResult").innerText = "Correct!";
-    } else {
-        document.getElementById("quizResult").innerText = "Wrong!";
-    }
-    qIndex = (qIndex + 1) % quiz.length;
-    loadQuiz();
-}
-
-loadQuiz();
 
 </script>
 
