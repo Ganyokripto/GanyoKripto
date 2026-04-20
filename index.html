@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GanyoKripto | V-Boost Launch & Miner</title>
+    <title>GanyoKripto | V-Boost Launch & Learn</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root { 
@@ -26,12 +26,16 @@
         .vboost-box h2 { color: var(--accent); margin: 0; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1px; }
         #timer { font-size: 2.2rem; font-weight: 900; color: white; margin: 10px 0; font-family: monospace; }
 
-        /* GAME SECTION */
-        #game-section { padding: 1.5rem; text-align: center; background: rgba(255,255,255,0.15); border-radius: 20px; margin: 20px 5%; border: 1px solid rgba(255,255,255,0.3); }
-        #game-canvas { height: 200px; position: relative; overflow: hidden; background: #1e7e34; border-radius: 15px; cursor: pointer; border: 2px dashed var(--accent); touch-action: manipulation; }
-        #coin { font-size: 50px; position: absolute; transition: 0.15s; user-select: none; z-index: 10; cursor: pointer; }
-        #score-display { font-size: 2rem; font-weight: bold; margin-top: 65px; color: white; opacity: 0.9; pointer-events: none; }
-        #game-msg { margin-top: 10px; font-weight: bold; min-height: 24px; color: var(--accent); }
+        /* SCRAMBLE GAME SECTION */
+        #game-section { padding: 2rem 1.5rem; text-align: center; background: #fff; border-radius: 20px; margin: 20px 5%; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        #game-section h2 { color: var(--primary); margin-top: 0; }
+        .scrambled-word { font-size: 2.5rem; font-weight: 900; letter-spacing: 5px; color: var(--primary); margin: 15px 0; text-transform: uppercase; background: #f0f0f0; padding: 10px; border-radius: 10px; }
+        .hint { font-style: italic; color: #666; margin-bottom: 20px; display: block; }
+        input[type="text"] { padding: 12px; width: 80%; max-width: 300px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; margin-bottom: 10px; outline: none; text-align: center; }
+        input[type="text"]:focus { border-color: var(--primary); }
+        .game-btns { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+        .check-btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .next-btn { background: #6c757d; color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
 
         .services { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .card { background: var(--card-bg); padding: 2.5rem 1.5rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; color: #333; display: flex; flex-direction: column; }
@@ -39,19 +43,13 @@
         .card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 1.5rem; }
         
         .btn { display: inline-block; background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: auto; border: none; cursor: pointer; font-size: 1rem; transition: 0.3s; }
-        .btn:hover { background: #1e7e34; transform: scale(1.05); }
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
         .modal-content { background: white; padding: 2rem; border-radius: 20px; width: 85%; max-width: 400px; text-align: center; position: relative; color: #333; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
-        .telco-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-        .telco-option { padding: 0.8rem; border: 2px solid #eee; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; }
-        .telco-option:hover { border-color: var(--primary); background: #f9f9f9; }
         
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #ffffff; color: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 10000; text-decoration: none; }
-
         .footer { background: rgba(0,0,0,0.1); color: white; text-align: center; padding: 3rem 1rem; margin-top: 4rem; }
-        .mtn { color: #ffcc00; } .telecel { color: #e60000; } .airteltigo { color: #003399; }
     </style>
 </head>
 <body>
@@ -73,15 +71,20 @@
         <p style="font-size: 0.8rem; color: #eee; margin: 0;">Days : Hours : Mins : Secs</p>
     </div>
 
-    <!-- GAME SECTION -->
+    <!-- LEARN & PLAY SCRAMBLE GAME -->
     <section id="game-section">
-        <h2 style="color: var(--accent); margin-top: 0;">🎮 V-BOOST MINER</h2>
-        <p style="margin-bottom: 15px;">Tap the coin to mine! Reach 50 for a prize.</p>
-        <div id="game-canvas">
-            <div id="coin">🪙</div>
-            <div id="score-display">Score: 0</div>
+        <h2>🧠 Crypto Scramble</h2>
+        <p>Unscramble the word to test your Crypto knowledge!</p>
+        <div class="scrambled-word" id="scrambledWord">BLOCKCHAIN</div>
+        <span class="hint" id="wordHint">Hint: The technology behind Bitcoin</span>
+        
+        <input type="text" id="userInput" placeholder="Enter word here...">
+        
+        <div class="game-btns">
+            <button class="check-btn" onclick="checkWord()">Check Answer</button>
+            <button class="next-btn" onclick="initGame()">New Word</button>
         </div>
-        <div id="game-msg">Tap the coin to start!</div>
+        <p id="feedback" style="margin-top: 15px; font-weight: bold;"></p>
     </section>
 
     <!-- SERVICES -->
@@ -89,28 +92,25 @@
         <div class="card">
             <i class="fa-solid fa-bolt"></i>
             <h3>Data Bundles</h3>
-            <p>Affordable MTN, Telecel, and AirtelTigo bundles for you.</p>
+            <p>Cheap MTN, Telecel, and AirtelTigo data bundles.</p>
             <button class="btn" onclick="showTelcos()">Order Data</button>
         </div>
-
         <div class="card">
             <i class="fa-solid fa-chart-line"></i>
             <h3>Digital DeFi Portal</h3>
-            <p>Manage your strategy dashboard and NFT assets.</p>
+            <p>Access your strategy dashboard and NFT portfolio.</p>
             <a href="https://tactics-strategy.com" target="_blank" class="btn">Enter Portal</a>
         </div>
-
         <div class="card">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3>Blockchain Academy</h3>
-            <p>Master Crypto, NFTs, and Decentralized Finance.</p>
+            <p>Learn everything about Crypto, NFTs, and DeFi.</p>
             <a href="https://v-academy.top" target="_blank" class="btn">Login Academy</a>
         </div>
-
         <div class="card">
             <i class="fa-solid fa-users"></i>
             <h3>WhatsApp Community</h3>
-            <p>Connect with a network of digital entrepreneurs.</p>
+            <p>Join thousands of entrepreneurs today.</p>
             <a href="https://whatsapp.com" target="_blank" class="btn">Join Group</a>
         </div>
     </div>
@@ -120,10 +120,10 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeTelcos()">&times;</span>
             <h2 style="color:var(--primary); margin-top: 0;">Select Network</h2>
-            <div class="telco-list">
-                <div class="telco-option" onclick="goToForm()"><i class="fa-solid fa-circle mtn"></i> MTN Ghana</div>
-                <div class="telco-option" onclick="goToForm()"><i class="fa-solid fa-circle telecel"></i> Telecel (Vodafone)</div>
-                <div class="telco-option" onclick="goToForm()"><i class="fa-solid fa-circle airteltigo"></i> AirtelTigo</div>
+            <div class="telco-list" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                <div style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">MTN Ghana</div>
+                <div style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">Telecel (Vodafone)</div>
+                <div style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: bold;" onclick="goToForm()">AirtelTigo</div>
             </div>
         </div>
     </div>
@@ -145,44 +145,47 @@
             document.getElementById("timer").innerHTML = `${d}:${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
         }, 1000);
 
-        // GAME LOGIC
-        let score = 0;
-        const coin = document.getElementById('coin');
-        const canvas = document.getElementById('game-canvas');
-        const scoreDisplay = document.getElementById('score-display');
-        const msg = document.getElementById('game-msg');
+        // SCRAMBLE GAME LOGIC
+        const words = [
+            { word: "BITCOIN", hint: "The first ever cryptocurrency" },
+            { word: "ETHEREUM", hint: "The king of smart contracts and DeFi" },
+            { word: "WALLET", hint: "Where you store your digital assets" },
+            { word: "MINING", hint: "The process of creating new crypto coins" },
+            { word: "SCAM", hint: "Something you must avoid in the crypto space" },
+            { word: "NFT", hint: "Non-fungible token (Digital art/assets)" },
+            { word: "BINANCE", hint: "A popular global crypto exchange" },
+            { word: "GANYOKRIPTO", hint: "The best place to learn digital wealth" }
+        ];
 
-        function moveCoin() {
-            const maxX = canvas.clientWidth - 60;
-            const maxY = canvas.clientHeight - 60;
-            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
-            coin.style.left = randomX + 'px';
-            coin.style.top = randomY + 'px';
+        let correctWord;
+
+        const initGame = () => {
+            let randomObj = words[Math.floor(Math.random() * words.length)];
+            let wordArray = randomObj.word.split("");
+            for (let i = wordArray.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [wordArray[i], wordArray[j]] = [wordArray[j], wordArray[i]];
+            }
+            document.getElementById("scrambledWord").innerText = wordArray.join("");
+            document.getElementById("wordHint").innerText = `Hint: ${randomObj.hint}`;
+            correctWord = randomObj.word.toLowerCase();
+            document.getElementById("userInput").value = "";
+            document.getElementById("feedback").innerText = "";
         }
 
-        coin.addEventListener('mousedown', handleMine);
-        coin.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            handleMine();
-        });
-
-        function handleMine() {
-            score++;
-            scoreDisplay.innerHTML = `Score: ${score}`;
-            moveCoin();
-            
-            if(score === 10) msg.innerHTML = "🔥 Keep Mining!";
-            if(score === 25) msg.innerHTML = "💎 You're a Whale!";
-            if(score === 50) {
-                msg.innerHTML = "🚀 WINNER! Send a screenshot to WhatsApp for a bonus!";
-                msg.style.color = "#ffffff";
-                msg.style.background = "#000";
-                msg.style.padding = "5px";
+        const checkWord = () => {
+            let userWord = document.getElementById("userInput").value.toLowerCase();
+            if(!userWord) return alert("Please enter a word!");
+            if(userWord !== correctWord) {
+                document.getElementById("feedback").innerText = `❌ Oops! "${userWord}" is not correct.`;
+                document.getElementById("feedback").style.color = "red";
+            } else {
+                document.getElementById("feedback").innerText = `✅ Correct! "${correctWord.toUpperCase()}" is the word!`;
+                document.getElementById("feedback").style.color = "green";
             }
         }
-        
-        moveCoin(); // Initial position
+
+        initGame();
 
         function showTelcos() { document.getElementById('telcoModal').style.display = 'flex'; }
         function closeTelcos() { document.getElementById('telcoModal').style.display = 'none'; }
