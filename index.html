@@ -66,9 +66,10 @@
         </div>
         <div class="package-grid" id="pkgGrid"></div>
         <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Phone Number">
-        <button class="order-btn" onclick="placeOrder()">
+        <!-- FIXED WHATSAPP LINK BELOW -->
+        <a href="https://wa.link/kbtdui" target="_blank" class="order-btn" onclick="checkOrder(event)">
             <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-        </button>
+        </a>
     </section>
 
     <!-- CORE SERVICES -->
@@ -123,7 +124,7 @@
 
         function renderPackages() {
             document.getElementById('pkgGrid').innerHTML = packages.map(p => `
-                <div class="pkg-btn" onclick="setPkg('${p.v} - GHC ${p.p}', this)">
+                <div class="pkg-btn" onclick="setPkg('${p.v}', this)">
                     <b>${p.v}</b><br>GHC ${p.p}
                 </div>
             `).join('');
@@ -141,11 +142,13 @@
             el.classList.add('active');
         }
 
-        function placeOrder() {
+        // Simple validation before opening the wa.link
+        function checkOrder(event) {
             const phone = document.getElementById('orderPhone').value;
-            if (!activePkg || !phone) return alert("Select a package and enter a phone number!");
-            const msg = `Hello GanyoKripto,%0A%0A*NEW DATA ORDER*%0A*Network:* ${activeNet}%0A*Package:* ${activePkg}%0A*Recipient:* ${phone}`;
-            window.open(`https://wa.me{msg}`, '_blank');
+            if (!activePkg || !phone) {
+                event.preventDefault();
+                alert("Please select a Data Package and enter the Phone Number first!");
+            }
         }
 
         const quizData = [
