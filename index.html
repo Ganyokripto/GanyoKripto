@@ -19,34 +19,34 @@
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
         .motto { color: var(--accent); font-weight: bold; font-size: 0.9rem; }
 
-        /* ORDER SECTION */
-        .order-section { background: #fff; padding: 2rem 1.5rem; border-radius: 20px; margin: 20px 5%; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
-        .order-section h2 { color: var(--primary); margin-top: 0; }
+        /* COMPACT ORDER SECTION */
+        .order-section { background: #fff; padding: 1.5rem 1rem; border-radius: 20px; margin: 15px 5%; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
+        .order-section h2 { color: var(--primary); margin-top: 0; font-size: 1.4rem; }
         
-        .network-grid { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
-        .net-btn { padding: 10px 20px; border: 2px solid #eee; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .network-grid { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
+        .net-btn { padding: 8px 15px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; }
         .net-btn.active { border-color: var(--primary); background: #e8f5e9; color: var(--primary); }
 
-        .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px; }
-        .pkg-btn { padding: 12px; border: 1px solid #ddd; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 0.9rem; background: #fdfdfd; text-align: center; color: #333; }
-        .pkg-btn.active { border-color: var(--primary); background: var(--primary); color: white; }
+        .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
+        .pkg-btn { padding: 10px 5px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.75rem; background: #fdfdfd; color: #333; }
+        .pkg-btn.active { border-color: var(--primary); background: var(--primary); color: white; font-weight: bold; }
 
-        .input-phone { padding: 15px; width: 90%; max-width: 350px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; margin-bottom: 15px; outline: none; text-align: center; }
-        .order-btn { background: #25d366; color: white; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 1.1rem; width: 100%; max-width: 350px; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto; text-decoration: none;}
+        .input-phone { padding: 12px; width: 100%; max-width: 280px; border: 2px solid #ddd; border-radius: 10px; font-size: 0.95rem; margin-bottom: 12px; outline: none; text-align: center; box-sizing: border-box; }
+        
+        /* REDUCED SMARTPHONE COMPATIBLE BUTTON */
+        .order-btn { background: #25d366; color: white; border: none; padding: 12px 20px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; max-width: 250px; display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 auto; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* SERVICES SECTION */
-        .services { padding: 1rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .card { background: var(--card-bg); padding: 2rem 1.5rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; color: #333; display: flex; flex-direction: column; }
-        .card i { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; }
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: auto; border: none; cursor: pointer; }
+        .services { padding: 1rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card-bg); padding: 1.5rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; color: #333; display: flex; flex-direction: column; }
+        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: auto; font-size: 0.9rem; }
 
-        /* QUIZ SECTION */
-        .quiz-container { background: #fff; padding: 2rem 1.5rem; border-radius: 20px; margin: 20px 5%; color: #333; text-align: center; }
-        .option-btn { display: block; width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 10px; cursor: pointer; text-align: left; background: white; font-size: 1rem; }
+        .quiz-container { background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; text-align: center; }
+        .option-btn { display: block; width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; text-align: left; background: white; font-size: 0.9rem; }
 
-        .vboost-box { background: rgba(0,0,0,0.2); margin: 20px auto; padding: 1.5rem; width: 90%; max-width: 800px; border-radius: 20px; border: 2px solid var(--accent); text-align: center; }
-        #timer { font-size: 2.2rem; font-weight: 900; color: white; margin: 10px 0; font-family: monospace; }
-        .footer { background: rgba(0,0,0,0.1); color: white; text-align: center; padding: 3rem 1rem; margin-top: 4rem; }
+        .vboost-box { background: rgba(0,0,0,0.2); margin: 15px auto; padding: 1rem; width: 90%; max-width: 800px; border-radius: 15px; border: 2px solid var(--accent); text-align: center; }
+        #timer { font-size: 1.8rem; font-weight: 900; color: white; font-family: monospace; }
+        .footer { background: rgba(0,0,0,0.1); color: white; text-align: center; padding: 2rem 1rem; margin-top: 2rem; font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -56,7 +56,6 @@
         <div class="motto">Knowledge is Money</div>
     </header>
 
-    <!-- DATA ORDERING AT TOP -->
     <section class="order-section">
         <h2>📊 Buy Cheap Data</h2>
         <div class="network-grid">
@@ -68,50 +67,43 @@
         <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Phone Number">
         
         <button class="order-btn" onclick="sendCustomOrder()">
-            <i class="fa-brands fa-whatsapp"></i> Place order Now
+            <i class="fa-brands fa-whatsapp"></i> Place Order Now
         </button>
     </section>
 
-    <!-- CORE SERVICES -->
     <div class="services">
         <div class="card">
             <i class="fa-solid fa-chart-line"></i>
-            <h3>Digital DeFi Portal</h3>
-            <p>Access strategy dashboard and NFT portfolio.</p>
+            <h3>DeFi Portal</h3>
             <a href="https://tactics-strategy.com" target="_blank" class="btn">Enter Portal</a>
         </div>
         <div class="card">
             <i class="fa-solid fa-graduation-cap"></i>
-            <h3>Blockchain Academy</h3>
-            <p>Master the future of money.</p>
+            <h3>Academy</h3>
             <a href="https://v-academy.top" target="_blank" class="btn">Login Academy</a>
         </div>
         <div class="card">
             <i class="fa-solid fa-users"></i>
-            <h3>WhatsApp Community</h3>
-            <p>Join the entrepreneurs group.</p>
+            <h3>Community</h3>
             <a href="https://whatsapp.com" target="_blank" class="btn">Join Group</a>
         </div>
     </div>
 
-    <!-- COUNTDOWN -->
     <div class="vboost-box">
-        <h2 style="color:var(--accent); margin:0; font-size: 1rem;">🚀 V-BOOST PROJECT LAUNCH</h2>
+        <h2 style="color:var(--accent); margin:0; font-size: 0.9rem;">🚀 V-BOOST PROJECT LAUNCH</h2>
         <div id="timer">00:00:00:00</div>
-    </div>
+    </section>
 
-    <!-- QUIZ SECTION -->
     <section class="quiz-container">
-        <h2 style="color:var(--primary); margin-top:0;">🎓 Crypto IQ Quiz</h2>
-        <p id="quiz-question" style="font-weight: bold;"></p>
+        <h2 style="color:var(--primary); margin-top:0; font-size: 1.2rem;">🎓 Crypto Quiz</h2>
+        <p id="quiz-question" style="font-weight: bold; font-size: 0.95rem;"></p>
         <div id="quiz-options"></div>
-        <p id="quiz-feedback" style="margin-top:15px; font-weight:bold;"></p>
-        <button class="pkg-btn" style="margin: 10px auto; display: block;" onclick="loadQuestion()">Next Question</button>
+        <p id="quiz-feedback" style="margin-top:10px; font-weight:bold; font-size: 0.9rem;"></p>
+        <button class="pkg-btn" style="margin: 5px auto; display: block; padding: 8px 15px;" onclick="loadQuestion()">Next Question</button>
     </section>
 
     <div class="footer">
-        <p>&copy; 2026 GanyoKripto. Knowledge is Money.</p>
-        <p>Support: 0505332010</p>
+        <p>&copy; 2026 GanyoKripto | Support: 0505332010</p>
     </div>
 
     <script>
@@ -125,7 +117,7 @@
         function renderPackages() {
             document.getElementById('pkgGrid').innerHTML = packages.map(p => `
                 <div class="pkg-btn" onclick="setPkg('${p.v}', '¢${p.p}', this)">
-                    <b>${p.v}</b><br>GHC ${p.p}
+                    <b>${p.v}</b><br>¢${p.p}
                 </div>
             `).join('');
         }
@@ -146,20 +138,18 @@
         function sendCustomOrder() {
             const phone = document.getElementById('orderPhone').value;
             if (!activePkg || !phone) {
-                return alert("Please select a Bundle and enter a Phone Number!");
+                return alert("Please select a Bundle and enter the Phone Number!");
             }
 
-            // The template you requested
             const message = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
             
-            // Sends to your number 0505332010
-            window.open(`https://wa.link/kbtdui{message}`, '_blank');
+            // This prioritizes the message delivery to your business number while using your link for tracking
+            window.open(`https://wa.me{message}`, '_blank');
         }
 
         const quizData = [
-            { q: "Which asset is known as 'Digital Gold'?", a: ["Bitcoin", "Ethereum", "Doge"], c: 0 },
-            { q: "What does DeFi stand for?", a: ["Decentralized Finance", "Detailed File", "Digital Fees"], c: 0 },
-            { q: "Where should you NEVER share your Seed Phrase?", a: ["Anywhere online", "In a safe", "On paper"], c: 0 }
+            { q: "Which asset is 'Digital Gold'?", a: ["Bitcoin", "Ethereum", "Doge"], c: 0 },
+            { q: "What does DeFi mean?", a: ["Decentralized Finance", "Digital Fees"], c: 0 }
         ];
 
         function loadQuestion() {
