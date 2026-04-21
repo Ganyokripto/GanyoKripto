@@ -15,6 +15,7 @@
         .section { padding: 2rem 5%; }
         .center { text-align: center; }
 
+        /* ORDER CARD */
         .order-card { background: white; color: #0f172a; padding: 2rem; border-radius: 20px; max-width: 450px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid var(--primary); }
         .payment-tag { background: #f0fdf4; border: 1px solid var(--primary); padding: 12px; border-radius: 10px; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.4; }
         
@@ -91,6 +92,38 @@
     </div>
 </section>
 
+<!-- PORTAL & ACADEMY -->
+<section class="section" id="portal">
+    <div class="pro-card">
+        <i class="fas fa-chart-line" style="color: var(--primary); font-size: 2rem;"></i>
+        <h3>Tactics DeFi Portal</h3>
+        <a href="https://tactics-strategy.com" target="_blank" class="btn-link">Enter Portal</a>
+    </div>
+    <div class="pro-card">
+        <i class="fas fa-graduation-cap" style="color: var(--primary); font-size: 2rem;"></i>
+        <h3>Ganyo Academy</h3>
+        <a href="https://v-academy.top" target="_blank" class="btn-link">Enter Academy</a>
+    </div>
+</section>
+
+<!-- QUIZ -->
+<section class="section center" id="quiz">
+    <div style="background: var(--card); padding: 2rem; border-radius: 20px; border: 1px solid #334155;">
+        <h2 style="color: var(--primary); margin-top: 0;">🧠 Blockchain Quiz</h2>
+        <p id="qText"></p>
+        <div id="qOptions"></div>
+        <p id="qRes"></p>
+        <button onclick="nextQ()">Next Question</button>
+    </div>
+</section>
+
+<div id="bottomNav">
+    <button onclick="window.scrollTo(0,0)">Home</button>
+    <button onclick="document.getElementById('portal').scrollIntoView()">Portal</button>
+    <button onclick="document.getElementById('quiz').scrollIntoView()">Quiz</button>
+    <button onclick="window.open('https://whatsapp.com')">Join</button>
+</div>
+
 <script>
 function placeOrder() {
     const phone = document.getElementById('userPhone').value;
@@ -107,7 +140,7 @@ function placeOrder() {
     
     const encodedMessage = encodeURIComponent(rawMessage);
 
-    // ✅ FIXED LINE ONLY
+    // ✅ FIXED HERE ONLY
     const finalUrl = "https://wa.me/" + adminWhatsApp + "?text=" + encodedMessage;
 
     window.open(finalUrl, "_blank");
