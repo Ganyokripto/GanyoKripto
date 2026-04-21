@@ -228,6 +228,43 @@ document.getElementById("score").innerText=score;
 
 renderPackages();
 nextQ();
+
+    // --- AUTOMATIC DAILY INSIGHT LOGIC ---
+const dailyContent = [
+    {
+        quote: "The best time to buy Bitcoin was 10 years ago. The second best time is today.",
+        reason: "W-Boost is built on smart contracts and NFTs, giving you full ownership of your growth from day one."
+    },
+    {
+        quote: "Knowledge is the only asset that the market cannot take away from you.",
+        reason: "With W-Boost, your progress is saved as a Passport NFT. You own your levels and earnings forever."
+    },
+    {
+        quote: "True freedom is the ability to exit when you choose.",
+        reason: "Unlike traditional systems, W-Boost lets you sell your NFT position at any time on the marketplace."
+    }
+];
+
+function updateDailyInsight() {
+    // Get the current day of the year (0-365) to pick a unique quote daily
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+    
+    // Select a quote based on the day
+    const index = dayOfYear % dailyContent.length;
+    const today = dailyContent[index];
+
+    // Update the website text automatically
+    document.getElementById('daily-quote').innerText = `"${today.quote}"`;
+    document.getElementById('vboost-reason').innerText = today.reason;
+}
+
+// Run the function as soon as the page loads
+updateDailyInsight();
+    
 </script>
 </body>
 </html>
