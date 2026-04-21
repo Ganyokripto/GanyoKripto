@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root { --primary: #22c55e; --bg: #0f172a; --card: #1e293b; --accent: #fbbf24; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; padding-bottom: 80px; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; padding-bottom: 90px; }
         
         header { background: #fff; color: #0f172a; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         .logo { color: var(--primary); font-weight: 800; font-size: 1.4rem; }
@@ -16,20 +16,20 @@
         .center { text-align: center; }
 
         /* SIMPLE ORDER FORM */
-        .order-card { background: white; color: #0f172a; padding: 2rem; border-radius: 20px; max-width: 450px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .order-card { background: white; color: #0f172a; padding: 2rem; border-radius: 20px; max-width: 450px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid var(--primary); }
         .payment-tag { background: #f0fdf4; border: 1px solid var(--primary); padding: 10px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem; }
         
         label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9rem; text-align: left; }
         input, select { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; box-sizing: border-box; }
         
-        .order-btn { background: var(--primary); color: white; padding: 16px; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; width: 100%; font-size: 1.2rem; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4); }
-        .order-btn:hover { transform: scale(1.02); background: #16a34a; }
+        .order-btn { background: var(--primary); color: white; padding: 16px; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; width: 100%; font-size: 1.2rem; margin-top: 20px; transition: 0.3s; }
+        .order-btn:hover { background: #16a34a; transform: translateY(-2px); }
 
         /* PORTAL & QUIZ STYLING */
         .pro-card { background: var(--card); padding: 1.5rem; border-radius: 15px; text-align: center; margin-bottom: 15px; border: 1px solid #334155; }
         .btn-link { display: inline-block; padding: 10px 20px; border: 2px solid var(--primary); color: white; text-decoration: none; border-radius: 25px; margin-top: 10px; font-weight: bold; }
         
-        #timer { font-size: 1.5rem; color: var(--accent); font-weight: bold; font-family: monospace; }
+        #timer { font-size: 1.4rem; color: var(--accent); font-weight: bold; font-family: monospace; }
         #bottomNav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); }
         #bottomNav button { background: none; border: none; color: #64748b; font-weight: bold; cursor: pointer; font-size: 0.8rem; }
     </style>
@@ -41,28 +41,28 @@
     <div id="timer">00:00:00</div>
 </header>
 
-<section class="section center" style="padding-top: 1rem;">
-    <h1 style="margin-bottom: 5px;">Knowledge is Money</h1>
-    <p style="color: #94a3b8; margin-top: 0;">Secure your data and your future.</p>
+<section class="section center">
+    <h1>Knowledge is Money</h1>
+    <p style="color: #94a3b8;">Order your data bundle below.</p>
 
     <!-- SIMPLE ORDER FORM -->
     <div class="order-card">
         <div class="payment-tag">
-            <i class="fas fa-wallet"></i> Pay to: <b>0242366444</b><br>
+            <i class="fas fa-wallet"></i> Pay: <b>0242366444</b><br>
             (Michael A. Believe)
         </div>
 
-        <label>Recipient Phone Number</label>
-        <input type="tel" id="userPhone" placeholder="024XXXXXXX" maxlength="10">
+        <label>Number to receive data</label>
+        <input type="tel" id="userPhone" placeholder="e.g. 024XXXXXXX" maxlength="10">
 
-        <label>Select Network</label>
+        <label>Network</label>
         <select id="userNetwork">
             <option value="MTN">MTN Ghana</option>
             <option value="Telecel">Telecel (Vodafone)</option>
             <option value="AirtelTigo">AirtelTigo</option>
         </select>
 
-        <label>Choose Data Bundle</label>
+        <label>Data Bundle</label>
         <select id="userBundle">
             <option value="1GB (¢5.5)">1GB - ¢5.5</option>
             <option value="2GB (¢10)">2GB - ¢10</option>
@@ -110,26 +110,24 @@
     <button onclick="window.scrollTo(0,0)"><i class="fas fa-home"></i><br>Home</button>
     <button onclick="document.getElementById('portal').scrollIntoView()"><i class="fas fa-cubes"></i><br>Assets</button>
     <button onclick="document.getElementById('quiz').scrollIntoView()"><i class="fas fa-brain"></i><br>Quiz</button>
-    <button onclick="window.open('https://whatsapp.com')"><i class="fab fa-whatsapp"></i><br>Join</button>
+    <button onclick="window.open('https://whatsapp.com')"><i class="fab fa-whatsapp"></i><br>Group</button>
 </div>
 
 <script>
-// WHATSAPP ORDER FUNCTION
 function placeOrder() {
     const phone = document.getElementById('userPhone').value;
     const network = document.getElementById('userNetwork').value;
     const bundle = document.getElementById('userBundle').value;
-    const myNumber = "233505332010"; // Your WhatsApp Number
 
     if (phone.length < 10) {
-        alert("Please enter a valid 10-digit phone number.");
+        alert("Please enter a valid 10-digit number.");
         return;
     }
 
-    const message = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${network}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${bundle}%0A----------------------%0A_Paying to Michael A. Believe now._`;
+    const message = "🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* " + network + "%0A📱 *Recipient:* " + phone + "%0A📦 *Bundle:* " + bundle + "%0A----------------------%0A_Paying to Michael A. Believe now._";
 
-    // Opens WhatsApp with the pre-filled message
-    window.open(`https://wa.me{myNumber}?text=${message}`, '_blank');
+    // Hard-coded your number 233505332010 to fix the error
+    window.location.href = "https://wa.me" + message;
 }
 
 // TIMER (May 20, 2026)
@@ -143,15 +141,15 @@ setInterval(() => {
     document.getElementById("timer").innerText = h + ":" + (m < 10 ? '0'+m : m) + ":" + (s < 10 ? '0'+s : s);
 }, 1000);
 
-// QUIZ DATA (25 QUESTIONS)
+// QUIZ DATA
 const quizzes = [
     {q: "What is the maximum supply of Bitcoin?", o: ["21 Million", "100 Million", "Unlimited"], c: 0},
-    {q: "Smallest unit of Bitcoin?", o: ["Satoshi", "Wei", "Gwei"], c: 0},
-    {q: "What is HODL?", o: ["Holding long term", "A type of coin", "Selling fast"], c: 0},
     {q: "Who created Bitcoin?", o: ["Satoshi Nakamoto", "Vitalik Buterin", "Elon Musk"], c: 0},
+    {q: "What is HODL?", o: ["Holding long term", "A type of coin", "Selling fast"], c: 0},
+    {q: "What is a Private Key?", o: ["Password for access", "Username", "Wallet address"], c: 0},
     {q: "What is an NFT?", o: ["Non-Fungible Token", "New Finance Tech", "Net Fast Trade"], c: 0},
     {q: "What is DeFi?", o: ["Decentralized Finance", "Deep Finance", "Digital Fiat"], c: 0},
-    {q: "What is a Private Key?", o: ["Password for access", "Username", "Wallet address"], c: 0},
+    {q: "Smallest unit of Bitcoin?", o: ["Satoshi", "Wei", "Gwei"], c: 0},
     {q: "What is a Cold Wallet?", o: ["Hardware/Offline", "Online app", "Exchange"], c: 0},
     {q: "What is Staking?", o: ["Locking coins for rewards", "Selling", "Mining"], c: 0},
     {q: "What is FOMO?", o: ["Fear Of Missing Out", "Future of Money", "Fast Mining"], c: 0},
