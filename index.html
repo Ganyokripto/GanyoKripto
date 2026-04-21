@@ -187,18 +187,6 @@ function sendOrder(){
     localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-// Format phone for SMS (0... to 233...)
-    let formatted = buyerPhone.startsWith('0') ? '233' + buyerPhone.substring(1) : buyerPhone;
-
-    // 4. SEND SMS TO BUYER
-    const apiURL = "https://sms.gonlinesites.com/app/sms/api";
-    const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw=="; 
-    const senderID = "GanyoData";
-    const smsText = `🚀 GanyoData: Your order for ${activePkg} (${activeNet}) has been received! Processing now. Thank you!`;
-
-    fetch(`${apiURL}?action=send-sms&api_key=${apiKey}&to=${formatted}&from=${senderID}&sms=${encodeURIComponent(smsText)}`)
-    .catch(err => console.log("SMS sent in background"));
-    
     const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
     window.open("https://wa.me/233505332010?text="+msg);
 }
