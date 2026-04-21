@@ -15,14 +15,12 @@
         .section { padding: 2rem 5%; }
         .center { text-align: center; }
 
-        /* ORDER CARD */
         .order-card { background: white; color: #0f172a; padding: 2rem; border-radius: 20px; max-width: 450px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid var(--primary); }
         .payment-tag { background: #f0fdf4; border: 1px solid var(--primary); padding: 12px; border-radius: 10px; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.4; }
         
         label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9rem; text-align: left; }
         input, select { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; box-sizing: border-box; }
         
-        /* WHATSAPP BUTTON STYLED AS LINK */
         .wa-btn { 
             display: block; 
             background-color: var(--primary); 
@@ -93,38 +91,6 @@
     </div>
 </section>
 
-<!-- PORTAL & ACADEMY -->
-<section class="section" id="portal">
-    <div class="pro-card">
-        <i class="fas fa-chart-line" style="color: var(--primary); font-size: 2rem;"></i>
-        <h3>Tactics DeFi Portal</h3>
-        <a href="https://tactics-strategy.com" target="_blank" class="btn-link">Enter Portal</a>
-    </div>
-    <div class="pro-card">
-        <i class="fas fa-graduation-cap" style="color: var(--primary); font-size: 2rem;"></i>
-        <h3>Ganyo Academy</h3>
-        <a href="https://v-academy.top" target="_blank" class="btn-link">Enter Academy</a>
-    </div>
-</section>
-
-<!-- QUIZ SECTION -->
-<section class="section center" id="quiz">
-    <div style="background: var(--card); padding: 2rem; border-radius: 20px; border: 1px solid #334155;">
-        <h2 style="color: var(--primary); margin-top: 0;">🧠 Blockchain Quiz</h2>
-        <p id="qText" style="font-weight: bold; min-height: 50px; font-size: 1.1rem;"></p>
-        <div id="qOptions"></div>
-        <p id="qRes" style="margin-top: 15px; font-weight: bold;"></p>
-        <button onclick="nextQ()" style="background:none; border: 1px solid var(--primary); color: var(--primary); padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 15px; font-weight: bold;">Next Question</button>
-    </div>
-</section>
-
-<div id="bottomNav">
-    <button onclick="window.scrollTo(0,0)"><i class="fas fa-home"></i><br>Home</button>
-    <button onclick="document.getElementById('portal').scrollIntoView()"><i class="fas fa-cubes"></i><br>Portal</button>
-    <button onclick="document.getElementById('quiz').scrollIntoView()"><i class="fas fa-brain"></i><br>Quiz</button>
-    <button onclick="window.open('https://whatsapp.com')"><i class="fab fa-whatsapp"></i><br>Join</button>
-</div>
-
 <script>
 function placeOrder() {
     const phone = document.getElementById('userPhone').value;
@@ -139,75 +105,13 @@ function placeOrder() {
 
     const rawMessage = "🚀 NEW DATA ORDER\n----------------------\n👤 Network: " + network + "\n📱 Recipient: " + phone + "\n📦 Bundle: " + bundle + "\n----------------------\nPaying to Michael A. Believe now.";
     
-    // Properly encode the message for the URL
     const encodedMessage = encodeURIComponent(rawMessage);
-    const finalUrl = "https://whatsapp.com" + adminWhatsApp + "&text=" + encodedMessage;
 
-    // Open the corrected URL
+    // ✅ FIXED LINE ONLY
+    const finalUrl = "https://wa.me/" + adminWhatsApp + "?text=" + encodedMessage;
+
     window.open(finalUrl, "_blank");
 }
-
-// TIMER - May 20, 2026
-const targetDate = new Date("May 20, 2026 00:00:00").getTime();
-setInterval(() => {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-    if(diff < 0) { document.getElementById("timer").innerText = "LIVE!"; return; }
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById("timer").innerText = h + ":" + (m < 10 ? '0'+m : m) + ":" + (s < 10 ? '0'+s : s);
-}, 1000);
-
-// QUIZ DATA
-const quizzes = [
-    {q: "What is the maximum supply of Bitcoin?", o: ["21 Million", "100 Million", "Unlimited"], c: 0},
-    {q: "Who created Bitcoin?", o: ["Satoshi Nakamoto", "Vitalik Buterin", "Elon Musk"], c: 0},
-    {q: "What is HODL?", o: ["Holding long term", "Selling fast", "High output digital loan"], c: 0},
-    {q: "What is a Private Key?", o: ["Access password", "Username", "Wallet address"], c: 0},
-    {q: "What is an NFT?", o: ["Non-Fungible Token", "New Finance Tech", "Net Fast Trade"], c: 0},
-    {q: "What is DeFi?", o: ["Decentralized Finance", "Digital Fiat", "Deep Finance"], c: 0},
-    {q: "Smallest unit of Bitcoin?", o: ["Satoshi", "Wei", "Gwei"], c: 0},
-    {q: "What is a Cold Wallet?", o: ["Offline storage", "Online app", "Exchange"], c: 0},
-    {q: "What is Staking?", o: ["Locking coins for rewards", "Mining", "Selling"], c: 1},
-    {q: "What is FOMO?", o: ["Fear Of Missing Out", "Future of Money", "Fast Mining"], c: 0},
-    {q: "What is a Whale?", o: ["Large crypto holder", "A beginner", "A scammer"], c: 0},
-    {q: "What is a Stablecoin?", o: ["Pegged to USD", "Very volatile", "Type of NFT"], c: 1},
-    {q: "What is MetaMask?", o: ["Browser wallet", "A game", "A crypto coin"], c: 0},
-    {q: "What is 'Gas'?", o: ["Transaction fee", "Fuel", "A coin"], c: 0},
-    {q: "What is an Airdrop?", o: ["Free tokens", "A scam", "Selling fast"], c: 0},
-    {q: "What is a Bull Market?", o: ["Prices rising", "Prices falling", "Market flat"], c: 0},
-    {q: "What is a Bear Market?", o: ["Prices falling", "Prices rising", "Market flat"], c: 0},
-    {q: "What is KYC?", o: ["Know Your Customer", "Keep Your Crypto", "Key Yield"], c: 0},
-    {q: "What is a DAO?", o: ["Decentralized Org", "Digital Asset", "Daily Order"], c: 0},
-    {q: "What is 'Burn'?", o: ["Removing supply", "Hacking", "Losing money"], c: 0},
-    {q: "What is Solidity?", o: ["Coding language", "A coin", "A wallet"], c: 0},
-    {q: "What is a DEX?", o: ["Decentralized Exchange", "Digital Entry", "Daily Exchange"], c: 0},
-    {q: "What is a Whitepaper?", o: ["Project technical guide", "Flyer", "Receipt"], c: 0},
-    {q: "What is a Seed Phrase?", o: ["Recovery words", "Username", "Public Key"], c: 0},
-    {q: "What is the BNB Chain?", o: ["Binance network", "Bitcoin chain", "Bank network"], c: 0}
-];
-
-let curQ = 0;
-function nextQ(){
-    curQ = Math.floor(Math.random() * quizzes.length);
-    const q = quizzes[curQ];
-    document.getElementById("qText").innerText = q.q;
-    document.getElementById("qOptions").innerHTML = q.o.map((opt, i) => 
-        `<button onclick="checkQ(${i})" style="display:block; width:100%; margin:8px 0; padding:12px; background:#334155; color:white; border:1px solid #475569; border-radius:10px; cursor:pointer; text-align:left;">${opt}</button>`).join('');
-    document.getElementById("qRes").innerText = "";
-}
-function checkQ(i){
-    const res = document.getElementById("qRes");
-    if(i === quizzes[curQ].c){
-        res.innerText = "✅ Correct!";
-        res.style.color = "var(--primary)";
-    } else {
-        res.innerText = "❌ Wrong! Try again.";
-        res.style.color = "#ef4444";
-    }
-}
-nextQ();
 </script>
 
 </body>
