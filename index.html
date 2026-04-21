@@ -127,7 +127,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
     </div>
     
     <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-top: 10px;">
-        <h4 style="color: var(--primary); margin: 0 0 5px 0; font-size: 1rem; text-transform: uppercase;">Why W-BOOST?</h4>
+        <h4 style="color: var(--primary); margin: 0 0 5px 0; font-size: 1rem; text-transform: uppercase;">Why V-BOOST?</h4>
         <p id="vboost-reason" style="font-size: 0.95rem; color: #555; margin: 0; line-height: 1.5;">
             Calculating the future of wealth...
         </p>
@@ -145,7 +145,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 </section>
 
 <div class="footer">
-GanyoKripto & copy; 2026 | Support: 0505332010
+GanyoDigital 2026 | powered By: GanyoKripto
 </div>
 
 <script>
@@ -179,15 +179,40 @@ el.classList.add('active');
 let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-function sendOrder(){
-    const phone = document.getElementById('orderPhone').value;
-    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
+async function sendOrder() {
+    const buyerPhone = document.getElementById('orderPhone').value;
     
+    // 1. Validation
+    if (!activePkg || !buyerPhone) { 
+        alert("Please select a package and enter a phone number."); 
+        return; 
+    }
+
+    // Standardize phone number for Ghana (changes 0... to 233...)
+    let formattedPhone = buyerPhone;
+    if (formattedPhone.startsWith('0')) {
+        formattedPhone = '233' + formattedPhone.substring(1);
+    }
+
+    // 2. Increment and Save Order Counter
     orderCount++;
     localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+    // 3. Trigger SMS Notification to Buyer (Background)
+    const apiURL = "https://sms.gonlinesites.com/app/sms/api";
+    const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw=="; 
+    const senderID = "GanyoData";
+    const smsText = `GanyoData: Order Received!\nBundle: ${activePkg}\nNetwork: ${activeNet}\nStatus: Processing. Thank you!`;
+
+    // Fire SMS silently
+    fetch(`${apiURL}?action=send-sms&api_key=${apiKey}&to=${formattedPhone}&from=${senderID}&sms=${encodeURIComponent(smsText)}`)
+    .catch(err => console.log("SMS failed, but order still processing."));
+
+    // 4. Send Order Details to YOUR WhatsApp
+    const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${buyerPhone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------%0A_Note: Buyer has been notified via SMS._`;
+    
+    // Opens WhatsApp to the specific order message
     window.open("https://wa.me/233505332010?text="+msg);
 }
 
@@ -237,7 +262,7 @@ const dailyContent = [
     },
     {
         quote: "Knowledge is the only asset that the market cannot take away from you.",
-        reason: "With W-Boost, your progress is saved as a Passport NFT. You own your levels and earnings forever."
+        reason: "With V-Boost, your progress is saved as a Passport NFT. You own your levels and earnings forever."
     },
     {
         quote: "True freedom is the ability to exit when you choose.",
