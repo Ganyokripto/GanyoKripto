@@ -179,34 +179,15 @@ el.classList.add('active');
 let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-function sendOrder() {
-    const buyerPhone = document.getElementById('orderPhone').value;
+function sendOrder(){
+    const phone = document.getElementById('orderPhone').value;
+    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
     
-    // 1. Validation
-    if (!activePkg || !buyerPhone) { 
-        alert("Please select a bundle and enter your phone number."); 
-        return; 
-    }
-
-    // 2. OPEN WHATSAPP IMMEDIATELY (This stops the phone from blocking it)
-    const wawindow.open("https://wa.me/233505332010?text="+msg);
-
-    // 3. DO THE BACKGROUND WORK (SMS & Counting)
     orderCount++;
     localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    // Format phone for SMS (0... to 233...)
-    let formatted = buyerPhone.startsWith('0') ? '233' + buyerPhone.substring(1) : buyerPhone;
-    
-    // Send SMS (The computer does this in the background while WhatsApp opens)
-    const smsText = `GanyoData: Order Received for ${activePkg}. Processing now!`;
-    fetch(`"https://sms.gonlinesites.com/app/sms/api{formatted}&from=GanyoData&sms=${encodeURIComponent(smsText)}`);
-
-    // 4. FINISH THE WHATSAPP MESSAGE
-    const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${buyerPhone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
-    
-    // Now we tell the window we opened in Step 2 to go to WhatsApp
+    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
     window.open("https://wa.me/233505332010?text="+msg);
 }
 
