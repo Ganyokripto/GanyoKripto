@@ -1,150 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ganyo Digital | Order Data</title>
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <style>
-        :root { --primary: #22c55e; --bg: #0f172a; --card: #1e293b; --accent: #fbbf24; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; padding-bottom: 90px; }
-        
-        header { background: #fff; color: #0f172a; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .logo { color: var(--primary); font-weight: 800; font-size: 1.4rem; }
-        
-        .section { padding: 2rem 5%; }
-        .center { text-align: center; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ganyo Digital | Order Data</title>
 
-        /* ORDER CARD */
-        .order-card { background: white; color: #0f172a; padding: 2rem; border-radius: 20px; max-width: 450px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid var(--primary); }
-        .payment-tag { background: #f0fdf4; border: 1px solid var(--primary); padding: 12px; border-radius: 10px; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.4; }
-        
-        label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9rem; text-align: left; }
-        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; box-sizing: border-box; }
-        
-        .wa-btn { 
-            display: block; 
-            background-color: var(--primary); 
-            color: white; 
-            padding: 16px; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            font-size: 1.1rem; 
-            text-align: center; 
-            margin-top: 25px; 
-            transition: 0.3s; 
-            cursor: pointer;
-        }
-        .wa-btn:hover { background-color: #16a34a; transform: translateY(-2px); }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .pro-card { background: var(--card); padding: 1.5rem; border-radius: 15px; text-align: center; margin-bottom: 15px; border: 1px solid #334155; }
-        .btn-link { display: inline-block; padding: 10px 20px; border: 2px solid var(--primary); color: white; text-decoration: none; border-radius: 25px; margin-top: 10px; font-weight: bold; }
-        
-        #timer { font-size: 1.4rem; color: var(--accent); font-weight: bold; font-family: monospace; }
-        #bottomNav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); }
-        #bottomNav button { background: none; border: none; color: #64748b; font-weight: bold; cursor: pointer; font-size: 0.8rem; }
-    </style>
+<style>
+:root { --primary: #22c55e; --bg: #0f172a; --card: #1e293b; --accent: #fbbf24; }
+
+body {
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:var(--bg);
+color:white;
+padding-bottom:90px;
+}
+
+header {
+background:#fff;
+color:#0f172a;
+padding:1rem 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+}
+
+.logo { color:var(--primary); font-weight:800; }
+
+.section { padding:2rem 5%; }
+.center { text-align:center; }
+
+.order-card {
+background:white;
+color:#0f172a;
+padding:2rem;
+border-radius:20px;
+max-width:450px;
+margin:auto;
+border:2px solid var(--primary);
+}
+
+input, select {
+width:100%;
+padding:12px;
+margin-top:5px;
+border-radius:10px;
+}
+
+.wa-btn {
+display:block;
+background:var(--primary);
+color:white;
+padding:16px;
+border-radius:12px;
+text-align:center;
+margin-top:20px;
+cursor:pointer;
+}
+
+.pro-card {
+background:var(--card);
+padding:1.5rem;
+border-radius:15px;
+margin-bottom:15px;
+text-align:center;
+}
+
+#timer {
+font-family:monospace;
+color:var(--accent);
+}
+
+#bottomNav {
+position:fixed;
+bottom:0;
+width:100%;
+background:#fff;
+display:flex;
+justify-content:space-around;
+padding:10px;
+}
+
+.game-btn {
+width:100%;
+padding:12px;
+margin:6px 0;
+background:#334155;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.score {
+margin-top:10px;
+font-weight:bold;
+color:var(--primary);
+}
+
+</style>
 </head>
+
 <body>
 
 <header>
-    <div class="logo">GANYO DIGITAL</div>
-    <div id="timer">00:00:00</div>
+<div class="logo">GANYO DIGITAL</div>
+<div id="timer">00:00:00</div>
 </header>
 
 <section class="section center">
-    <h1>Knowledge is Money</h1>
-    <p style="color: #94a3b8;">Order your data bundle below.</p>
+<h1>Knowledge is Money</h1>
 
-    <div class="order-card">
-        <div class="payment-tag">
-            <i class="fas fa-wallet"></i> Pay: <b>0242366444</b><br>
-            Name: <b>Michael A. Believe</b>
-        </div>
+<div class="order-card">
 
-        <label>Number to receive data</label>
-        <input type="tel" id="userPhone" placeholder="e.g. 024XXXXXXX" maxlength="10">
+<label>Phone</label>
+<input type="tel" id="userPhone">
 
-        <label>Network</label>
-        <select id="userNetwork">
-            <option value="MTN">MTN Ghana</option>
-            <option value="Telecel">Telecel (Vodafone)</option>
-            <option value="AirtelTigo">AirtelTigo</option>
-        </select>
+<label>Network</label>
+<select id="userNetwork">
+<option>MTN</option>
+<option>Telecel</option>
+<option>AirtelTigo</option>
+</select>
 
-        <label>Data Bundle</label>
-        <select id="userBundle">
-            <option value="1GB (¢5.5)">1GB - ¢5.5</option>
-            <option value="2GB (¢10)">2GB - ¢10</option>
-            <option value="3GB (¢15)">3GB - ¢15</option>
-            <option value="4GB (¢20)">4GB - ¢20</option>
-            <option value="5GB (¢25)">5GB - ¢25</option>
-            <option value="6GB (¢30)">6GB - ¢30</option>
-            <option value="7GB (¢35)">7GB - ¢35</option>
-            <option value="8GB (¢40)">8GB - ¢40</option>
-            <option value="10GB (¢45)">10GB - ¢45</option>
-        </select>
+<label>Bundle</label>
+<select id="userBundle">
+<option>1GB (¢5.5)</option>
+<option>2GB (¢10)</option>
+<option>3GB (¢15)</option>
+</select>
 
-        <a id="whatsappLink" class="wa-btn" onclick="placeOrder()">
-            <i class="fab fa-whatsapp"></i> PLACE ORDER NOW
-        </a>
-    </div>
+<div class="wa-btn" onclick="placeOrder()">ORDER NOW</div>
+
+</div>
 </section>
 
-<!-- PORTAL & ACADEMY -->
 <section class="section" id="portal">
-    <div class="pro-card">
-        <i class="fas fa-chart-line" style="color: var(--primary); font-size: 2rem;"></i>
-        <h3>Tactics DeFi Portal</h3>
-        <a href="https://tactics-strategy.com" target="_blank" class="btn-link">Enter Portal</a>
-    </div>
-    <div class="pro-card">
-        <i class="fas fa-graduation-cap" style="color: var(--primary); font-size: 2rem;"></i>
-        <h3>Ganyo Academy</h3>
-        <a href="https://v-academy.top" target="_blank" class="btn-link">Enter Academy</a>
-    </div>
+<div class="pro-card">
+<h3>DeFi Portal</h3>
+<a href="https://tactics-strategy.com" target="_blank">Enter</a>
+</div>
+
+<div class="pro-card">
+<h3>Academy</h3>
+<a href="https://v-academy.top" target="_blank">Enter</a>
+</div>
 </section>
 
-<!-- QUIZ -->
 <section class="section center" id="quiz">
-    <div style="background: var(--card); padding: 2rem; border-radius: 20px; border: 1px solid #334155;">
-        <h2 style="color: var(--primary); margin-top: 0;">🧠 Blockchain Quiz</h2>
-        <p id="qText"></p>
-        <div id="qOptions"></div>
-        <p id="qRes"></p>
-        <button onclick="nextQ()">Next Question</button>
-    </div>
+<h2>🧠 Quiz</h2>
+
+<p id="qText"></p>
+<div id="qOptions"></div>
+<p id="qRes"></p>
+
+<div class="score">Score: <span id="score">0</span></div>
+
+<button onclick="nextQ()">Next Question</button>
+
 </section>
 
 <div id="bottomNav">
-    <button onclick="window.scrollTo(0,0)">Home</button>
-    <button onclick="document.getElementById('portal').scrollIntoView()">Portal</button>
-    <button onclick="document.getElementById('quiz').scrollIntoView()">Quiz</button>
-    <button onclick="window.open('https://whatsapp.com')">Join</button>
+<button onclick="window.scrollTo(0,0)">Home</button>
+<button onclick="document.getElementById('portal').scrollIntoView()">Portal</button>
+<button onclick="document.getElementById('quiz').scrollIntoView()">Quiz</button>
 </div>
 
 <script>
-function placeOrder() {
-    const phone = document.getElementById('userPhone').value;
-    const network = document.getElementById('userNetwork').value;
-    const bundle = document.getElementById('userBundle').value;
-    const adminWhatsApp = "233505332010";
 
-    if (phone.length < 10) {
-        alert("Please enter a valid 10-digit number.");
-        return;
-    }
+// ===== ORDER =====
+function placeOrder(){
+const phone=document.getElementById('userPhone').value;
+const network=document.getElementById('userNetwork').value;
+const bundle=document.getElementById('userBundle').value;
 
-    const rawMessage = "🚀 NEW DATA ORDER\n----------------------\n👤 Network: " + network + "\n📱 Recipient: " + phone + "\n📦 Bundle: " + bundle + "\n----------------------\nPaying to Michael A. Believe now.";
-    
-    const encodedMessage = encodeURIComponent(rawMessage);
-
-    // ✅ FIXED HERE ONLY
-    const finalUrl = "https://wa.me/" + adminWhatsApp + "?text=" + encodedMessage;
-
-    window.open(finalUrl, "_blank");
+if(phone.length<10){
+alert("Enter valid number");
+return;
 }
+
+const msg=`NEW ORDER\nNetwork:${network}\nPhone:${phone}\nBundle:${bundle}`;
+window.open("https://wa.me/233505332010?text="+encodeURIComponent(msg));
+}
+
+// ===== TIMER =====
+const targetDate=new Date("May 20, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+let now=new Date().getTime();
+let diff=targetDate-now;
+
+if(diff<0){
+document.getElementById("timer").innerText="LIVE";
+return;
+}
+
+let h=Math.floor(diff/3600000);
+let m=Math.floor((diff%3600000)/60000);
+let s=Math.floor((diff%60000)/1000);
+
+document.getElementById("timer").innerText=
+h+":"+(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
+
+},1000);
+
+
+// ===== QUIZ + SCORE =====
+const quizzes=[
+{q:"Bitcoin is?",o:["Crypto","Bank","App"],c:0},
+{q:"NFT means?",o:["Token","Non-Fungible Token","Coin"],c:1},
+{q:"HODL means?",o:["Hold","Sell","Trade"],c:0}
+];
+
+let curQ=0;
+let score=0;
+
+function nextQ(){
+curQ=Math.floor(Math.random()*quizzes.length);
+let q=quizzes[curQ];
+
+document.getElementById("qText").innerText=q.q;
+
+document.getElementById("qOptions").innerHTML=q.o.map((opt,i)=>
+`<button class="game-btn" onclick="checkQ(${i})">${opt}</button>`
+).join('');
+
+document.getElementById("qRes").innerText="";
+}
+
+function checkQ(i){
+if(i===quizzes[curQ].c){
+score++;
+document.getElementById("qRes").innerText="Correct";
+}else{
+document.getElementById("qRes").innerText="Wrong";
+}
+
+document.getElementById("score").innerText=score;
+}
+
+nextQ();
+
 </script>
 
 </body>
