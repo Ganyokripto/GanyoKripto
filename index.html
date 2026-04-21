@@ -179,16 +179,43 @@ el.classList.add('active');
 let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-function sendOrder(){
-    const phone = document.getElementById('orderPhone').value;
-    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
+async function sendOrder() {
+    const buyerPhone = document.getElementById('orderPhone').value;
     
+    // 1. Basic Validation
+    if (!activePkg || !buyerPhone) { 
+        alert("Please select a bundle and enter your phone number."); 
+        return; 
+    }
+
+    // Ensure the number starts with 233 for the SMS API
+    let formattedPhone = buyerPhone;
+    if (formattedPhone.startsWith('0')) {
+        formattedPhone = '233' + formattedPhone.substring(1);
+    }
+
+    // 2. Update your Order Counter
     orderCount++;
     localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
-    window.open("https://wa.me/233505332010?text="+msg);
+    // 3. Send SMS Confirmation to the BUYER
+    const apiURL = "https://gonlinesites.com";
+    const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw=="; // Your provided Key
+    const senderID = "GanyoData";
+    const smsText = `Hello! Your order for ${activePkg} (${activeNet}) has been received by GanyoData. We are processing it now. Thank you for choosing us!`;
+
+    // Fire the SMS in the background
+    fetch(`${apiURL}?action=send-sms&api_key=${apiKey}&to=${formattedPhone}&from=${senderID}&sms=${encodeURIComponent(smsText)}`)
+    .then(response => console.log("Buyer notified via SMS"))
+    .catch(err => console.log("SMS failed, but proceeding to WhatsApp"));
+
+    // 4. Send the Order details to YOU on WhatsApp
+    const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${buyerPhone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------%0A_The buyer has been notified via SMS._`;
+    
+    window.open(`https://wa.link/zq4vhj`, '_blank');
+}
+
 }
 
 // TIMER
