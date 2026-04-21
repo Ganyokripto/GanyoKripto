@@ -179,43 +179,17 @@ el.classList.add('active');
 let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-function sendOrder() {
-    const buyerPhone = document.getElementById('orderPhone').value;
+function sendOrder(){
+    const phone = document.getElementById('orderPhone').value;
+    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
     
-    // 1. Validation
-    if (!activePkg || !buyerPhone) { 
-        alert("Please select a bundle and enter your phone number."); 
-        return; 
-    }
-
-    // 2. SMARTPHONE POPUP FIX
-    const waWindow = window.open("about:blank", "_blank");
-
-    // 3. BACKGROUND WORK: Update Counter
     orderCount++;
     localStorage.setItem('GanyoData', orderCount);
-    if (document.getElementById('totalOrders')) {
-        document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
-    }
+    document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    // Format phone for Ghana SMS API (0... to 233...)
-    let formatted = buyerPhone.startsWith('0') ? '233' + buyerPhone.substring(1) : buyerPhone;
-
-    // 4. TRIGGER SMS TO BUYER (Fixed API URL)
-    const apiURL = "https://gonlinesites.com"; // Added full path
-    const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw=="; 
-    const senderID = "GanyoData";
-    const smsText = `🚀 GanyoData: Your order for ${activePkg} (${activeNet}) has been received! Processing now. Thank you!`;
-
-    fetch(`${apiURL}?action=send-sms&api_key=${apiKey}&to=${formatted}&from=${senderID}&sms=${encodeURIComponent(smsText)}`)
-    .catch(err => console.log("SMS background task complete."));
-
-    // 5. REDIRECT TO YOUR WHATSAPP (Fixed Link)
-    const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${buyerPhone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
-    
-    // Fixed: Added /233505332010 and correct slash
-    waWindow.location.href = "https://wa.me" + waMsg;
-
+    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+    window.open("https://wa.me/233505332010?text="+msg);
+}
 
 // TIMER
 const target=new Date("May 30, 2026 00:00:00").getTime();
