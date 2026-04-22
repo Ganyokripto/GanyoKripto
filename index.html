@@ -271,15 +271,6 @@ function updateDailyInsight() {
 // Run the function as soon as the page loads
 updateDailyInsight();
 
-<script>
-    // This ONLY shows the number when you first open the site
-    window.addEventListener('load', function() {
-        let savedCount = localStorage.getItem("ganyo_final_v12") || "0";
-        if (document.getElementById('totalOrders')) {
-            document.getElementById('totalOrders').innerText = parseInt(savedCount).toLocaleString();
-        }
-    });
 </script>
-
 </body>
 </html>
