@@ -273,10 +273,10 @@ updateDailyInsight();
 
 </script>
     <script>
-    // 1. READ: Get the saved number immediately when page loads
-    // We use a unique key 'ganyo_official_count' to avoid old data
+    alert("Script is loading!"); // If you don't see this, the site hasn't updated
     let orderCount = parseInt(localStorage.getItem('ganyo_final_v1')) || 0;
-
+    // ... rest of the code ...
+</script>
     // 2. DISPLAY: Show that saved number on the screen
     const counterDisplay = document.getElementById('totalOrders');
     if (counterDisplay) {
