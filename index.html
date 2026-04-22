@@ -271,6 +271,44 @@ function updateDailyInsight() {
 // Run the function as soon as the page loads
 updateDailyInsight();
 
+<script>
+    // 1. Unique key for fresh data
+    const ORDER_KEY = "ganyo_final_v10";
+
+    // 2. Load the count when the page opens
+    window.addEventListener('load', function() {
+        let savedCount = localStorage.getItem(ORDER_KEY) || "0";
+        const display = document.getElementById('totalOrders');
+        if (display) {
+            display.innerText = parseInt(savedCount).toLocaleString();
+        }
+    });
+
+    // 3. The function that runs when you click your order button
+    function sendOrder() {
+        const phone = document.getElementById('orderPhone').value;
+
+        // Check if bundle is selected and phone is entered
+        if (typeof activePkg === 'undefined' || !activePkg || !phone) {
+            alert("Please select a bundle and enter your phone number.");
+            return;
+        }
+
+        // Get current count, add 1, and save it permanently in browser
+        let currentCount = parseInt(localStorage.getItem(ORDER_KEY) || "0");
+        currentCount++;
+        localStorage.setItem(ORDER_KEY, currentCount);
+
+        // Update the screen instantly
+        const display = document.getElementById('totalOrders');
+        if (display) {
+            display.innerText = currentCount.toLocaleString();
+        }
+
+        // --- Keep your WhatsApp redirect code here ---
+        console.log("Order count saved and updated!");
+    }
 </script>
 </body>
 </html>
+
