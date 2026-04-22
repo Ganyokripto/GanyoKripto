@@ -182,7 +182,7 @@ el.classList.add('active');
 }
 
 // ORDER COUNTER LOGIC - ONLY INCREASES ON CLICK
-let orderCount = parseInt(localStorage.getItem('ganyo_final_count')) || 0; 
+let orderCount = parseInt(localStorage.getItem('myOrderCount')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
 function sendOrder(){
@@ -190,7 +190,7 @@ function sendOrder(){
     if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
     
     orderCount++;
-    localStorage.setItem('ganyo_final_count
+    localStorage.setItem('myOrderCount
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
     const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
