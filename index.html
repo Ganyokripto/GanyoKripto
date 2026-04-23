@@ -63,10 +63,15 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <div class="motto">Powered By: GanyoKripto</div>
 </header>
 
-<!-- CES Ticker under Logo -->
-<div style="text-align: center; margin: 10px 0;">
+<!-- CES Token Ticker - Mobile Optimized -->
+<div id="ces-ticker-container" style="width: 100%; text-align: center; margin: 15px 0; min-height: 80px; display: block !important;">
     <script src="https://coingecko.com"></script>
-    <gecko-coin-ticker-widget locale="en" outlined="true" coin-id="whalebit" initial-currency="usd"></gecko-coin-ticker-widget>
+    <gecko-coin-ticker-widget 
+        locale="en" 
+        outlined="true" 
+        coin-id="whalebit" 
+        initial-currency="usd">
+    </gecko-coin-ticker-widget>
 </div>
     
 <!-- PAYMENT INSTRUCTIONS SECTION -->
