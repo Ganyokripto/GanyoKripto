@@ -288,43 +288,6 @@ function updateDailyInsight() {
 // Run the function as soon as the page loads
 updateDailyInsight();
 
-<script>
-    // 1. UNIQUE KEY: Using a brand new name (v15) ensures we bypass old errors
-    const GANYO_MEMORY_KEY = "ganyo_data_orders_v15";
-
-    // 2. IMMEDIATE LOAD: This runs the second the page opens
-    (function loadInitialCount() {
-        const saved = localStorage.getItem(GANYO_MEMORY_KEY) || "0";
-        const display = document.getElementById('totalOrders');
-        if (display) {
-            display.innerText = parseInt(saved).toLocaleString();
-        }
-    })();
-
-    // 3. THE MAIN FUNCTION: Keeps your packages working AND saves the count
-    function sendOrder() {
-        const phone = document.getElementById('orderPhone').value;
-
-        // Check if bundle and phone are ready
-        if (typeof activePkg === 'undefined' || !activePkg || !phone) {
-            alert("Please select a bundle and enter your phone number.");
-            return;
-        }
-
-        // UPDATE MEMORY: Get current, add 1, and SAVE
-        let count = parseInt(localStorage.getItem(GANYO_MEMORY_KEY) || "0");
-        count++;
-        localStorage.setItem(GANYO_MEMORY_KEY, count);
-
-        // UPDATE SCREEN: Show the new number immediately
-        const display = document.getElementById('totalOrders');
-        if (display) {
-            display.innerText = count.toLocaleString();
-        }
-
-        // --- Your existing WhatsApp/Package logic below ---
-        console.log("Order count saved: " + count);
-    }
 </script>
 </body>
 </html>
