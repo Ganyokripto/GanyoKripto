@@ -7,7 +7,6 @@
     
     <!-- FIX: Ensure this is ONLY inside the <head> -->
     <link rel="icon" type="image/png" href="Logo.png">
-    
     <link rel="stylesheet" href="https://cloudflare.com">
 
 <style>
@@ -62,15 +61,13 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 
 <body>
     
-<header style="display: flex; align-items: center; justify-content: space-between; padding: 10px 5%; background: #fff; width: 100%; box-sizing: border-box; min-height: 70px;">
-    <!-- Logo and Text Grouped on the Left -->
-    <div style="display: flex; align-items: center; flex-shrink: 0;">
-        <img src="Logo.png" alt="Logo" style="width: 40px; height: 40px; object-fit: contain; margin-right: 12px;">
-        <span class="logo" style="margin: 0; line-height: 1;">GanyoDigital</span>
+<header style="display: flex; align-items: center; justify-content: start;">
+    <div class="logo" style="display: flex; align-items: center;">
+        <img src="Logo.png" alt="Logo" style="width: 40px; height: auto; margin-right: 10px;">
+        GanyoDigital
     </div>
-    
+    <div class="motto" style="margin-left: 20px;">Powered By: GanyoKripto</div>
 </header>
->
 
 <!-- STYLIZED COINGECKO WIDGET -->
 <section style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
@@ -186,6 +183,9 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <button class="next-btn" onclick="nextQ()">Next Question</button>
 </section>
 
+<div class="footer">
+GanyoDigital 2026 | Knowledge is Power, Knowledge is Money
+</div>
 
 <script>
 let activeNet='MTN', activePkg='', activePrice='';
@@ -307,8 +307,3 @@ updateDailyInsight();
 </script>
 </body>
 </html>
-
-<div class="footer">
-GanyoDigital 2026 | Knowledge is Power, Knowledge is Money
-</div>
-
