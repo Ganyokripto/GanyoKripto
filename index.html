@@ -73,47 +73,44 @@
     <div class="motto">Powered By: GanyoKripto</div>
 </header>
 
-<!-- REFERRAL SECTION -->
-<section>
-    <h3 style="color: var(--primary); margin:0;">💰 Refer & Earn</h3>
-    <p style="font-size: 0.85rem; margin: 10px 0;">Earn 30p on every purchase from friends you refer!</p>
-    <button onclick="shareWebsite()" style="background: var(--primary); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:bold; cursor:pointer;">🚀 Share & Earn Now</button>
+<!-- 1. REFERRAL SECTION -->
+<section id="referral" style="background: #fff; padding: 2rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem; margin-bottom: 15px;">💰 Refer & Earn</h2>
+    <p style="font-size: 1rem; color: #444; max-width: 600px; margin: 0 auto 20px auto; line-height: 1.5;">
+        Earn a commission on <strong style="color: var(--primary);">every purchase</strong> made by people you refer to GanyoData.
+    </p>
+    <button onclick="shareWebsite()" style="background: var(--primary); color: white; padding: 12px 25px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; font-size: 0.9rem;">🚀 Start Earning</button>
 </section>
 
-    <!-- PAYMENT INSTRUCTIONS SECTION -->
+<!-- 2. PAYMENT INSTRUCTIONS (Your exact style) -->
 <section style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
     <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem;">💳 Payment Instructions</h2>
     <p style="margin-bottom: 10px; font-size: 0.9rem;">Make payment to the number below before placing your order:</p>
     
-    <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px dashed #ccc;">
-        <span style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; font-weight: bold;">Mobile Money Number</span>
+    <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px dashed #ccc; cursor: pointer;" onclick="copyNumber()">
+        <span style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; font-weight: bold;">Mobile Money Number (Tap to Copy)</span>
         <strong style="font-size: 1.5rem; color: #000; letter-spacing: 1px;" id="momoNumber">0242366444</strong>
         <span style="display: block; font-size: 0.9rem; color: var(--primary); font-weight: bold; margin-top: 5px;">Name: Michael .A. Believe</span>
     </div>
     
     <p style="margin-top: 10px; font-size: 0.85rem; color: #d9534f; font-weight: bold;">⚠️ Please use 1 as the Reference!</p>
 </section>
-<script>
 
-<!-- ORDER SECTION -->
-<section>
-    <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data Now</h2>
+<!-- 3. ORDER SECTION -->
+<section class="order-section" style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data</h2>
     <div class="network-grid">
         <div class="net-btn active" onclick="setNet('MTN', this)">MTN</div>
         <div class="net-btn" onclick="setNet('Telecel', this)">Telecel</div>
         <div class="net-btn" onclick="setNet('AirtelTigo', this)">AirtelTigo</div>
     </div>
-
     <div class="package-grid" id="pkgGrid"></div>
-
-    <input type="number" id="orderPhone" placeholder="Recipient Number" required>
+    <input type="number" id="orderPhone" placeholder="Recipient Number (0...)" required>
     <button class="order-btn" onclick="sendOrder()">Place Order Now</button>
-    
-    <div class="order-count">
-        <i class="fas fa-check-circle"></i> <span id="totalOrders">0</span> Orders Processed
-    </div>
+    <div class="order-count"><i class="fas fa-check-circle"></i> <span id="totalOrders">0</span> Orders Processed</div>
 </section>
-    
+
+<script>
     // YOUR UPDATED PRICING
     const dataStore = {
         'MTN': [
