@@ -76,13 +76,13 @@
 <!-- REFERRAL SECTION -->
 <section>
     <h3 style="color: var(--primary); margin:0;">💰 Refer & Earn</h3>
-    <p style="font-size: 0.85rem; margin: 10px 0;">Earn commission on every purchase from friends you refer!</p>
+    <p style="font-size: 0.85rem; margin: 10px 0;">Earn 30p on every purchase from friends you refer!</p>
     <button onclick="shareWebsite()" style="background: var(--primary); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:bold; cursor:pointer;">🚀 Share & Earn Now</button>
 </section>
 
 <!-- ORDER SECTION -->
 <section>
-    <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data</h2>
+    <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data Now</h2>
     <div class="network-grid">
         <div class="net-btn active" onclick="setNet('MTN', this)">MTN</div>
         <div class="net-btn" onclick="setNet('Telecel', this)">Telecel</div>
@@ -104,7 +104,7 @@
     <h3 style="color: var(--primary); margin-top:0;">💳 Payment Info</h3>
     <div class="momo-box">
         <strong style="font-size: 1.2rem;">0242366444</strong><br>
-        <span style="font-size: 0.8rem; color: #666;">Name: Michael .A. Believe</span>
+        <span style="font-size: 1.2rem; color: #666;">Name: Michael .A. Believe</strong>
     </div>
     <p style="font-size: 0.75rem; color: red; font-weight: bold; margin-top: 5px;">Reference: 1</p>
 </section>
@@ -118,7 +118,7 @@
             {v: '7GB', p: '35'}, {v: '8GB', p: '40'}, {v: '10GB', p: '45'}
         ],
         'Telecel': [
-            {v: '1GB', p: '5.5'}, {v: '2GB', p: '10'}, {v: '5GB', p: '25'}
+            {v: '1GB', p: '5.5'}, {v: '5GB', p: '25'}, {v: '10GB', p: '45'}
         ],
         'AirtelTigo': [
             {v: '1GB', p: '5.5'}, {v: '2GB', p: '10'}, {v: '5GB', p: '25'}
@@ -128,7 +128,7 @@
     let activeNet = 'MTN';
     let activePkg = '';
     let activePrice = '';
-    let orderCount = parseInt(localStorage.getItem('ganyoCount')) || 1240;
+    let orderCount = parseInt(localStorage.getItem('ganyoCount')) || 0;
 
     function setNet(net, btn) {
         activeNet = net;
@@ -172,14 +172,14 @@
 
     function shareWebsite() {
         const shareData = {
-            title: 'GanyoDigital - Fast Data',
-            text: 'Buy cheap MTN, Telecel & AirtelTigo data here:',
-            url: 'https://github.io'
+            title: 'GanyoDigital - Fast - Affordable - Reliable Data',
+            text: 'Buy affordable MTN, Telecel & AirtelTigo data here:',
+            url: 'https://ganyokripto.github.io/GanyoDigital/
         };
         if (navigator.share) {
             navigator.share(shareData);
         } else {
-            alert("Copy & Share: https://github.io");
+            alert("Copy & Share:https://ganyokripto.github.io/GanyoDigital/#");
         }
     }
 
