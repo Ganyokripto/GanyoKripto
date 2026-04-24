@@ -58,10 +58,41 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 
 <body>
 
-<header>
-<div class="logo">GanyoDigital</div>
-<div class="motto">Knowledge is Money</div>
+<header style="display: flex; align-items: center; justify-content: start;">
+    <div class="logo" style="display: flex; align-items: center;">
+        <img src="Logo.png" alt="Logo" style="width: 40px; height: auto; margin-right: 10px;">
+        GanyoDigital
+    </div>
 </header>
+
+<!-- STYLIZED COINGECKO WIDGET -->
+<section style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    
+    <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem; margin-bottom: 15px;">📈 Market Update</h2>
+    
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 100px;">
+        <script src="https://widgets.coingecko.com/gecko-coin-ticker-widget.js"></script>
+        <gecko-coin-ticker-widget 
+            locale="en" 
+            outlined="true" 
+            coin-id="whalebit" 
+            initial-currency="usd">
+        </gecko-coin-ticker-widget>
+    </div>
+    
+</section>
+
+    <!-- MATCHING REFERRAL PROGRAM SECTION -->
+<section id="referral" style="background: #fff; padding: 2rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    
+    <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem; margin-bottom: 15px;">💰 Refer & Earn</h2>
+    
+    <p style="font-size: 1rem; color: #444; max-width: 600px; margin: 0 auto 20px auto; line-height: 1.5;">
+        Get rewarded for every friend you bring! Earn a commission on 
+        <strong style="color: var(--primary);">every purchase</strong> made by people you refer to GanyoData</strong>.
+    </p>
+
+    </section>
 
 <!-- PAYMENT INSTRUCTIONS SECTION -->
 <section style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
@@ -78,7 +109,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 </section>
     
 <section class="order-section">
-<h2>Buy Cheap Data</h2>
+<h2>Buy Affordable - Fast Data</h2>
 <div class="network-grid">
 <div class="net-btn active" onclick="setNet('MTN',this)">MTN</div>
 <div class="net-btn" onclick="setNet('Telecel',this)">Telecel</div>
@@ -97,7 +128,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <div class="card">
 <i class="fa fa-chart-line" style="font-size:2rem; color:var(--primary)"></i>
 <h3>DeFi Portal</h3>
-<a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank" class="serv-btn">Enter Portal</a>
+<a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank" class="serv-btn">Sign Up</a>
 </div>
 
 <div class="card">
@@ -118,7 +149,7 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <div id="timer">00:00:00:00</div>
 </div>
 
-<!-- DAILY W-BOOST INSIGHT (UPDATED) -->
+<!-- DAILY V-BOOST INSIGHT (UPDATED) -->
 <section style="background: #fff; padding: 2rem 1.5rem; border-radius: 20px; margin: 20px 5%; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; border-left: 5px solid var(--accent);">
     <h3 style="color: var(--primary); margin-top: 0; font-size: 1.3rem;">🌟 Daily Crypto Insight</h3>
     
@@ -134,7 +165,6 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
     </div>
 </section>
 
-    
 <section class="quiz-container">
 <h3>🧠 Crypto & DeFi IQ Quiz</h3>
 <p id="qText" style="font-weight:bold; font-size:1.1rem;"></p>
@@ -143,10 +173,6 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
 <div class="score-box">Your Score: <span id="score">0</span></div>
 <button class="next-btn" onclick="nextQ()">Next Question</button>
 </section>
-
-<div class="footer">
-GanyoDigital 2026 | powered By: GanyoKripto
-</div>
 
 <script>
 let activeNet='MTN', activePkg='', activePrice='';
@@ -179,33 +205,28 @@ el.classList.add('active');
 let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-// ORDER COUNTER LOGIC
-let orderCount = parseInt(localStorage.getItem('GanyoData')) || 1240; // Starts at 1240 for credibility
-document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
-
 function sendOrder(){
-    const phoneInput = document.getElementById('orderPhone');
-    const phone = phoneInput ? phoneInput.value : "";
+    const phone = document.getElementById('orderPhone').value;
+    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
     
-    // Safety check: ensure activePkg and activeNet are already defined in your code
-    if(typeof activePkg === 'undefined' || !activePkg || !phone){ 
-        alert("Please select your network/bundle and enter a phone number."); 
-        return; 
-    }
-    
-    // Update counter
     orderCount++;
     localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    // Fix formatting (using 'phone' instead of 'buyerPhone')
-    let formatted = phone.startsWith('0') ? '233' + phone.substring(1) : phone;
+// Format phone for SMS (0... to 233...)
+    let formatted = buyerPhone.startsWith('0') ? '233' + buyerPhone.substring(1) : buyerPhone;
 
-    const msg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${formatted}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+    // 4. SEND SMS TO BUYER
+    const apiURL = "https://sms.gonlinesites.com/app/sms/api";
+    const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw=="; 
+    const senderID = "GanyoData";
+    const smsText = `🚀 GanyoData: Your order for ${activePkg} (${activeNet}) has been received! Processing now. Thank you!`;
+
+    fetch(`${apiURL}?action=send-sms&api_key=${apiKey}&to=${formatted}&from=${senderID}&sms=${encodeURIComponent(smsText)}`)
+    .catch(err => console.log("SMS sent in background"));
     
-    window.open("https://wa.me/233505332010?text=" + msg);
-}
-    
+    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+    window.open("https://wa.me/233505332010?text="+msg);
 }
 
 // TIMER
@@ -283,5 +304,10 @@ function updateDailyInsight() {
 updateDailyInsight();
 
 </script>
+
+<div class="footer">
+GanyoDigital @2026 | powered By: GanyoKripto
+</div>
+    
 </body>
 </html>
