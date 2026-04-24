@@ -93,39 +93,6 @@ header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-b
         <strong style="color: var(--primary);">every purchase</strong> made by people you refer to GanyoData.
     </p>
 
-    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-        <!-- The "Start Earning" button now triggers the phone's Share menu -->
-        <button onclick="shareWebsite()" style="background-color: var(--primary); color: white; padding: 12px 25px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; font-size: 0.9rem;">
-            🚀 Start Earning
-        </button>
-        
-        <a href="https://wa.me" 
-           target="_blank" 
-           style="background-color: #25D366; color: white; padding: 12px 25px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
-            Share on Status
-        </a>
-    </div>
-</section>
-
-<!-- SCRIPT TO TRIGGER PHONE SHARE MENU -->
-<script>
-function shareWebsite() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'GanyoDigital - Affordable - Fast - Reliable Data',
-            text: 'Buy cheap data and save money! Use my link:',
-            url: 'https://ganyokripto.github.io/GanyoDigital/#'
-        }).then(() => {
-            console.log('Thanks for sharing!');
-        })
-        .catch(console.error);
-    } else {
-        // Fallback for older computers/browsers
-        alert("Copy this link to share: https://ganyokripto.github.io/GanyoDigital/#");
-    }
-}
-</script>
-
 <!-- PAYMENT INSTRUCTIONS SECTION -->
 <section style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
     <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem;">💳 Payment Instructions</h2>
