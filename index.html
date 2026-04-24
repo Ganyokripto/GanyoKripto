@@ -1,332 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GanyoKripto | Fast Data & Services</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GanyoDigital | Fast Data Services</title>
+    
+    <!-- Tab Icon -->
+    <link rel="icon" type="image/png" href="Logo.png">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 
-<style>
-:root { 
---primary:#28a745; 
---accent:#ffc107; 
---bg:#28a745; 
---text:#ffffff; 
---card-bg:#ffffff;
-}
+    <style>
+        :root { 
+            --primary: #28a745; 
+            --accent: #ffc107; 
+            --bg: #28a745; 
+        }
 
-body { font-family:'Segoe UI',sans-serif; margin:0; background:var(--bg); color:var(--text); }
-header { background:#fff; padding:1rem 5%; display:flex; justify-content:space-between; align-items:center; }
-.logo { color:var(--primary); font-weight:bold; font-size:1.4rem; }
-.motto { color:var(--accent); font-weight:bold; font-size:0.9rem; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #fff; }
+        
+        /* Clean White Header */
+        header { 
+            background: #fff; 
+            padding: 10px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo-box { display: flex; align-items: center; color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+        .motto { color: var(--primary); font-weight: bold; font-size: 0.9rem; }
 
-/* ORDER SECTION */
-.order-section { background:#fff; padding:1.5rem; border-radius:20px; margin:15px 5%; color:#333; text-align:center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-.network-grid { display:flex; gap:8px; justify-content:center; }
-.net-btn { padding:8px 15px; border:2px solid #eee; border-radius:8px; cursor:pointer; font-weight:bold; }
-.net-btn.active { background:#e8f5e9; border-color:var(--primary); color:var(--primary); }
+        /* Content Sections */
+        section { 
+            background: #fff; 
+            padding: 1.5rem; 
+            border-radius: 20px; 
+            margin: 15px 5%; 
+            color: #333; 
+            text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid var(--accent);
+        }
 
-.package-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:15px 0; }
-.pkg-btn { padding:10px; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:0.8rem; background:#f9f9f9; }
-.pkg-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
+        /* Network Buttons */
+        .network-grid { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
+        .net-btn { padding: 10px 15px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-weight: bold; background: #fff; flex: 1; max-width: 100px; }
+        .net-btn.active { background: #e8f5e9; border-color: var(--primary); color: var(--primary); }
 
-.input-phone { padding:12px; width:100%; max-width:280px; border-radius:10px; border:1px solid #ccc; margin-bottom:10px; outline:none; text-align:center; }
-.order-btn { background:#25d366; color:white; padding:12px; border-radius:50px; border:none; cursor:pointer; width:100%; max-width:250px; font-weight:bold; font-size:1rem; }
+        /* Data Package Grid */
+        .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; }
+        .pkg-btn { padding: 10px 5px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-size: 0.8rem; background: #f9f9f9; transition: 0.2s; }
+        .pkg-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
 
-.order-count { font-size: 0.85rem; color: #28a745; margin-top: 10px; font-weight: bold; background: #f0fdf4; padding: 5px 12px; border-radius: 15px; display: inline-block; }
+        input { padding: 12px; width: 100%; max-width: 300px; border-radius: 12px; border: 1px solid #ccc; margin-bottom: 15px; text-align: center; font-size: 1rem; box-sizing: border-box; }
+        .order-btn { background: #25d366; color: white; padding: 15px; border-radius: 50px; border: none; cursor: pointer; width: 100%; max-width: 300px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
+        
+        .order-count { font-size: 0.85rem; color: var(--primary); margin-top: 15px; font-weight: bold; }
 
-/* SERVICES BUTTONS */
-.services { padding:1rem 5%; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; }
-.card { background:white; padding:1.5rem; border-radius:15px; text-align:center; color:#333; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-.card h3 { margin-top:0; color:var(--primary); }
-.serv-btn { display:block; background:var(--primary); color:white; text-decoration:none; padding:10px; border-radius:8px; font-weight:bold; transition: 0.3s; margin-top:10px; }
-
-/* TIMER */
-.vboost-box { margin:15px 5%; padding:1rem; border:2px solid var(--accent); text-align:center; border-radius:15px; background: rgba(0,0,0,0.1); }
-#timer { font-size:1.8rem; font-weight:bold; font-family: monospace; }
-
-/* QUIZ */
-.quiz-container { background:#fff; padding:1.5rem; margin:15px 5%; border-radius:15px; color:#333; text-align:center; }
-.option-btn { display:block; width:100%; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #ddd; cursor:pointer; background:#fff; transition:0.2s; font-weight:500; }
-.option-btn:hover { background:#f0f0f0; }
-.score-box { font-weight:bold; margin:15px 0; font-size:1.1rem; color:var(--primary); }
-.next-btn { background:#6c757d; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; }
-
-.footer { text-align:center; padding:25px; font-size:0.9rem; }
-</style>
+        /* Payment Badge */
+        .momo-box { background: #f8f9fa; padding: 10px; border-radius: 12px; border: 1px dashed #ccc; margin-top: 10px; }
+    </style>
 </head>
-
 <body>
 
-<header style="display: flex; align-items: center; justify-content: start;">
-    <div class="logo" style="display: flex; align-items: center;">
-        <img src="Logo.png" alt="Logo" style="width: 40px; height: auto; margin-right: 10px;">
+<header>
+    <div class="logo-box">
+        <img src="Logo.png" alt="Logo" style="width: 35px; height: auto; margin-right: 8px;">
         GanyoDigital
     </div>
+    <div class="motto">Powered By: GanyoKripto</div>
 </header>
 
-<!-- STYLIZED COINGECKO WIDGET -->
-<section style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-    
-    <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem; margin-bottom: 15px;">📈 Market Update</h2>
-    
-    <div style="display: flex; justify-content: center; align-items: center; min-height: 100px;">
-        <script src="https://widgets.coingecko.com/gecko-coin-ticker-widget.js"></script>
-        <gecko-coin-ticker-widget 
-            locale="en" 
-            outlined="true" 
-            coin-id="whalebit" 
-            initial-currency="usd">
-        </gecko-coin-ticker-widget>
-    </div>
-    
+<!-- REFERRAL SECTION -->
+<section>
+    <h3 style="color: var(--primary); margin:0;">💰 Refer & Earn</h3>
+    <p style="font-size: 0.85rem; margin: 10px 0;">Earn commission on every purchase from friends you refer!</p>
+    <button onclick="shareWebsite()" style="background: var(--primary); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:bold; cursor:pointer;">🚀 Share & Earn Now</button>
 </section>
 
-    <!-- MATCHING REFERRAL PROGRAM SECTION -->
-<section id="referral" style="background: #fff; padding: 2rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-    
-    <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem; margin-bottom: 15px;">💰 Refer & Earn</h2>
-    
-    <p style="font-size: 1rem; color: #444; max-width: 600px; margin: 0 auto 20px auto; line-height: 1.5;">
-        Get rewarded for every friend you bring! Earn a commission on 
-        <strong style="color: var(--primary);">every purchase</strong> made by people you refer to GanyoData</strong>.
-    </p>
-
-    </section>
-
-<!-- PAYMENT INSTRUCTIONS SECTION -->
-<section style="background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; border: 2px solid var(--accent); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-    <h2 style="color: var(--primary); margin-top: 0; font-size: 1.3rem;">💳 Payment Instructions</h2>
-    <p style="margin-bottom: 10px; font-size: 0.9rem;">Make payment to the number below before placing your order:</p>
-    
-    <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px dashed #ccc;">
-        <span style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; font-weight: bold;">Mobile Money Number</span>
-        <strong style="font-size: 1.5rem; color: #000; letter-spacing: 1px;" id="momoNumber">0242366444</strong>
-        <span style="display: block; font-size: 0.9rem; color: var(--primary); font-weight: bold; margin-top: 5px;">Name: Michael .A. Believe</span>
-    </div>
-    
-    <p style="margin-top: 10px; font-size: 0.85rem; color: #d9534f; font-weight: bold;">⚠️ Please use 1 as the Reference!</p>
-</section>
-    
-<section class="order-section" style="background: #fff; padding: 2rem; border-radius: 20px; margin: 15px 5%; color: #333; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-    <h2 style="color: var(--primary);">🛒 Order Data</h2>
-    
-    <div class="network-grid" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
-        <button class="net-btn active" onclick="selectNet('MTN')" style="padding: 10px 20px; border-radius: 8px; border: 2px solid #eee; cursor: pointer; font-weight: bold;">MTN</button>
-        <button class="net-btn" onclick="selectNet('Telecel')" style="padding: 10px 20px; border-radius: 8px; border: 2px solid #eee; cursor: pointer; font-weight: bold;">Telecel</button>
-        <button class="net-btn" onclick="selectNet('AirtelTigo')" style="padding: 10px 20px; border-radius: 8px; border: 2px solid #eee; cursor: pointer; font-weight: bold;">AirtelTigo</button>
+<!-- ORDER SECTION -->
+<section>
+    <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data</h2>
+    <div class="network-grid">
+        <div class="net-btn active" onclick="setNet('MTN', this)">MTN</div>
+        <div class="net-btn" onclick="setNet('Telecel', this)">Telecel</div>
+        <div class="net-btn" onclick="setNet('AirtelTigo', this)">AirtelTigo</div>
     </div>
 
-    <!-- Bundle Dropdown -->
-    <select id="dataPlan" class="input-phone" style="margin: 15px 0; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; font-size: 1rem;">
-        <option value="">Select Bundle</option>
-    </select>
+    <div class="package-grid" id="pkgGrid"></div>
 
-    <!-- Recipient Number -->
-    <input type="number" id="orderPhone" class="input-phone" placeholder="Recipient Number" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 20px; font-size: 1rem; box-sizing: border-box;">
+    <input type="number" id="orderPhone" placeholder="Recipient Number (0...)" required>
+    <button class="order-btn" onclick="sendOrder()">Place Order Now</button>
     
-    <!-- PLACE ORDER BUTTON -->
-    <button class="order-btn" onclick="sendOrder()" style="background: var(--primary); color: white; width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer;">
-        🚀 Place Order Now
-    </button>
-
-    <div class="order-count" style="margin-top: 15px; font-size: 0.9rem; color: #666;">
-        <i class="fa-solid fa-circle-check"></i> <span id="totalOrders">0</span> Orders Processed
+    <div class="order-count">
+        <i class="fas fa-check-circle"></i> <span id="totalOrders">0</span> Orders Processed
     </div>
 </section>
 
-
-<div class="services">
-<div class="card">
-<i class="fa fa-chart-line" style="font-size:2rem; color:var(--primary)"></i>
-<h3>DeFi Portal</h3>
-<a href="https://app.tactics-strategy.com/r/C7lrUMxqZF" target="_blank" class="serv-btn">Sign Up</a>
-</div>
-
-<div class="card">
-<i class="fa fa-graduation-cap" style="font-size:2rem; color:var(--primary)"></i>
-<h3>Academy</h3>
-<a href="https://v-academy.top" target="_blank" class="serv-btn">Login Academy</a>
-</div>
-
-<div class="card">
-<i class="fa fa-users" style="font-size:2rem; color:var(--primary)"></i>
-<h3>Community</h3>
-<a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank" class="serv-btn">Join WhatsApp</a>
-</div>
-</div>
-
-<div class="vboost-box">
-<h3>🚀 V-BOOST LAUNCH COUNTDOWN</h3>
-<div id="timer">00:00:00:00</div>
-</div>
-
-<!-- DAILY V-BOOST INSIGHT (UPDATED) -->
-<section style="background: #fff; padding: 2rem 1.5rem; border-radius: 20px; margin: 20px 5%; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; border-left: 5px solid var(--accent);">
-    <h3 style="color: var(--primary); margin-top: 0; font-size: 1.3rem;">🌟 Daily Crypto Insight</h3>
-    
-    <div id="daily-quote" style="font-size: 1.1rem; font-weight: 600; color: #444; font-style: italic; margin: 15px 0; line-height: 1.4;">
-        "Loading today's wisdom..."
+<!-- PAYMENT INSTRUCTIONS -->
+<section>
+    <h3 style="color: var(--primary); margin-top:0;">💳 Payment Info</h3>
+    <div class="momo-box">
+        <strong style="font-size: 1.2rem;">0242366444</strong><br>
+        <span style="font-size: 0.8rem; color: #666;">Name: Michael .A. Believe</span>
     </div>
-    
-    <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-top: 10px;">
-        <h4 style="color: var(--primary); margin: 0 0 5px 0; font-size: 1rem; text-transform: uppercase;">Why V-BOOST?</h4>
-        <p id="vboost-reason" style="font-size: 0.95rem; color: #555; margin: 0; line-height: 1.5;">
-            Calculating the future of wealth...
-        </p>
-    </div>
-</section>
-
-<section class="quiz-container">
-<h3>🧠 Crypto & DeFi IQ Quiz</h3>
-<p id="qText" style="font-weight:bold; font-size:1.1rem;"></p>
-<div id="qOptions"></div>
-<p id="qRes" style="font-weight:bold; height:20px;"></p>
-<div class="score-box">Your Score: <span id="score">0</span></div>
-<button class="next-btn" onclick="nextQ()">Next Question</button>
+    <p style="font-size: 0.75rem; color: red; font-weight: bold; margin-top: 5px;">Reference: 1</p>
 </section>
 
 <script>
-let activeNet='MTN', activePkg='', activePrice='';
-const packages=[
-{v:"1GB",p:"5.5"},{v:"2GB",p:"10"},{v:"3GB",p:"15"},
-{v:"4GB",p:"20"},{v:"5GB",p:"25"},{v:"6GB",p:"30"},
-{v:"7GB",p:"35"},{v:"8GB",p:"40"},{v:"10GB",p:"45"}
-];
+    // YOUR UPDATED PRICING
+    const dataStore = {
+        'MTN': [
+            {v: '1GB', p: '5.5'}, {v: '2GB', p: '10'}, {v: '3GB', p: '15'},
+            {v: '4GB', p: '20'}, {v: '5GB', p: '25'}, {v: '6GB', p: '30'},
+            {v: '7GB', p: '35'}, {v: '8GB', p: '40'}, {v: '10GB', p: '45'}
+        ],
+        'Telecel': [
+            {v: '1GB', p: '5.5'}, {v: '2GB', p: '10'}, {v: '5GB', p: '25'}
+        ],
+        'AirtelTigo': [
+            {v: '1GB', p: '5.5'}, {v: '2GB', p: '10'}, {v: '5GB', p: '25'}
+        ]
+    };
 
-function renderPackages(){
-document.getElementById('pkgGrid').innerHTML = packages.map(p=>`
-<div class="pkg-btn" onclick="setPkg('${p.v}','¢${p.p}',this)">
-${p.v}<br>¢${p.p}
-</div>`).join('');
-}
+    let activeNet = 'MTN';
+    let activePkg = '';
+    let activePrice = '';
+    let orderCount = parseInt(localStorage.getItem('ganyoCount')) || 1240;
 
-function setNet(net,el){
-activeNet=net;
-document.querySelectorAll('.net-btn').forEach(b=>b.classList.remove('active'));
-el.classList.add('active');
-}
+    function setNet(net, btn) {
+        activeNet = net;
+        activePkg = '';
+        document.querySelectorAll('.net-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-function setPkg(pkg,price,el){
-activePkg=pkg; activePrice=price;
-document.querySelectorAll('.pkg-btn').forEach(b=>b.classList.remove('active'));
-el.classList.add('active');
-}
-
-function sendOrder() {
-    // 1. Get the recipient phone number from your input field
-    const phone = document.getElementById('orderPhone').value;
-    
-    // 2. Validate that everything is selected (activePkg, activeNet, and activePrice must be defined)
-    if (typeof activePkg === 'undefined' || !activePkg || !phone) { 
-        alert("Please select a network, a bundle, and enter the recipient number."); 
-        return; 
+        const grid = document.getElementById('pkgGrid');
+        grid.innerHTML = '';
+        dataStore[net].forEach(item => {
+            const d = document.createElement('div');
+            d.className = 'pkg-btn';
+            d.innerHTML = `<strong>${item.v}</strong><br>GHS ${item.p}`;
+            d.onclick = () => {
+                document.querySelectorAll('.pkg-btn').forEach(p => p.classList.remove('active'));
+                d.classList.add('active');
+                activePkg = item.v;
+                activePrice = item.p;
+            };
+            grid.appendChild(d);
+        });
     }
-    
-    // 3. Update the Order Counter for your website stats
-    orderCount++;
-    localStorage.setItem('GanyoData', orderCount);
-    document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    // 4. Format the recipient number for the message (0... to 233...)
-    let formattedNum = phone.startsWith('0') ? '233' + phone.substring(1) : phone;
+    function sendOrder() {
+        const phone = document.getElementById('orderPhone').value;
+        if (!activePkg || !phone) { 
+            alert("Please select a bundle and enter your number!"); 
+            return; 
+        }
 
-    // 5. Create the WhatsApp message
-    const msg = `🚀 *NEW DATA ORDER*%0A` +
-                `----------------------%0A` +
-                `👤 *Network:* ${activeNet}%0A` +
-                `📊 *Plan:* ${activePkg}%0A` +
-                `💰 *Amount:* ${activePrice}%0A` +
-                `📱 *Recipient:* ${formattedNum}%0A` +
-                `----------------------%0A` +
-                `Sent via GanyoDigital`;
+        orderCount++;
+        localStorage.setItem('ganyoCount', orderCount);
+        document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-    // 6. Redirect the user to WhatsApp with your target number (0505332010)
-    // We use the full international format for the link: 233505332010
-    const whatsappURL = `window.open("https://wa.me/233505332010?text="+msg);
-    
-    window.open ("https://wa.me/233505332010?text="+msg);
-}
-
-// TIMER
-const target=new Date("May 30, 2026 00:00:00").getTime();
-setInterval(()=>{
-let diff=target-new Date().getTime();
-if(diff<0){ document.getElementById("timer").innerText="LIVE"; return; }
-let d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
-document.getElementById("timer").innerText=`${d}:${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
-},1000);
-
-const quiz=[
-{q:"What is known as the 'Digital Gold'?", o:["Ethereum","Bitcoin","Solana"], c:1},
-{q:"What does NFT stand for?", o:["New Financial Tool","Non-Fungible Token","National Fund Trust"], c:1},
-{q:"Which of these is a stablecoin?", o:["USDT","Dogecoin","Litecoin"], c:0},
-{q:"DeFi stands for?", o:["Decentralized Finance","Digital Finance","Detailed File"], c:0},
-{q:"What is a private key used for?", o:["Sharing on social media","Accessing your wallet","Creating a password"], c:1}
-];
-
-let score=0, curQ=0;
-function nextQ(){
-curQ = Math.floor(Math.random()*quiz.length);
-let q=quiz[curQ];
-document.getElementById("qText").innerText=q.q;
-document.getElementById("qOptions").innerHTML=q.o.map((opt,i)=>`
-<button class="option-btn" onclick="check(${i})">${opt}</button>`).join('');
-document.getElementById("qRes").innerText="";
-}
-
-function check(i){
-const isCorrect = i === quiz[curQ].c;
-if(isCorrect) score++;
-document.getElementById("qRes").innerText=isCorrect ? "✅ Correct!" : "❌ Wrong!";
-document.getElementById("qRes").style.color=isCorrect ? "green" : "red";
-document.getElementById("score").innerText=score;
-}
-
-renderPackages();
-nextQ();
-
-// --- AUTOMATIC DAILY INSIGHT LOGIC ---
-const dailyContent = [
-    {
-        quote: "The best time to buy Bitcoin was 10 years ago. The second best time is today.",
-        reason: "W-Boost is built on smart contracts and NFTs, giving you full ownership of your growth from day one."
-    },
-    {
-        quote: "Knowledge is the only asset that the market cannot take away from you.",
-        reason: "With V-Boost, your progress is saved as a Passport NFT. You own your levels and earnings forever."
-    },
-    {
-        quote: "True freedom is the ability to exit when you choose.",
-        reason: "Unlike traditional systems, W-Boost lets you sell your NFT position at any time on the marketplace."
+        let formatted = phone.startsWith('0') ? '233' + phone.substring(1) : phone;
+        
+        const msg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📦 *Bundle:* ${activePkg}%0A💰 *Price:* GHS ${activePrice}%0A📱 *Recipient:* ${formatted}%0A----------------------`;
+        
+        window.open(`https://wa.me{msg}`, '_blank');
     }
-];
 
-function updateDailyInsight() {
-    // Get the current day of the year (0-365) to pick a unique quote daily
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 0);
-    const diff = now - start;
-    const oneDay = 1000 * 60 * 60 * 24;
-    const dayOfYear = Math.floor(diff / oneDay);
-    
-    // Select a quote based on the day
-    const index = dayOfYear % dailyContent.length;
-    const today = dailyContent[index];
+    function shareWebsite() {
+        const shareData = {
+            title: 'GanyoDigital - Fast Data',
+            text: 'Buy cheap MTN, Telecel & AirtelTigo data here:',
+            url: 'https://github.io'
+        };
+        if (navigator.share) {
+            navigator.share(shareData);
+        } else {
+            alert("Copy & Share: https://github.io");
+        }
+    }
 
-    // Update the website text automatically
-    document.getElementById('daily-quote').innerText = `"${today.quote}"`;
-    document.getElementById('vboost-reason').innerText = today.reason;
-}
-
-// Run the function as soon as the page loads
-updateDailyInsight();
-
+    window.onload = () => {
+        setNet('MTN', document.querySelector('.net-btn'));
+        document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
+    };
 </script>
 
-<div class="footer">
-GanyoDigital @2026 | powered By: GanyoKripto
-</div>
-    
 </body>
 </html>
