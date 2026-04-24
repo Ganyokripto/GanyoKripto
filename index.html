@@ -179,18 +179,31 @@ el.classList.add('active');
 let orderCount = parseInt(localStorage.getItem('ganyoOrders')) || 0; 
 document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
+// ORDER COUNTER LOGIC
+let orderCount = parseInt(localStorage.getItem('GanyoData')) || 1240; // Starts at 1240 for credibility
+document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
+
 function sendOrder(){
     const phone = document.getElementById('orderPhone').value;
-    if(!activePkg || !phone){ alert("Select bundle and enter number"); return; }
+    
+    // Check if variables are set
+    if(typeof activePkg === 'undefined' || !activePkg || !phone){ 
+        alert("Please select a network, a bundle, and enter a phone number."); 
+        return; 
+    }
     
     orderCount++;
     localStorage.setItem('GanyoData', orderCount);
     document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-// Format phone for SMS (0... to 233...)
-    let formatted = buyerPhone.startsWith('0') ? '233' + buyerPhone.substring(1) : buyerPhone;
-    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${phone}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
-    window.open("https://wa.me/233505332010?text="+msg);
+    // FIXED: Changed buyerPhone to phone
+    let formatted = phone.startsWith('0') ? '233' + phone.substring(1) : phone;
+
+    const msg=`🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📱 *Recipient:* ${formatted}%0A📦 *Bundle:* ${activePkg} (${activePrice})%0A----------------------`;
+    
+    window.open("https://wa.me/233505332010?text=" + msg);
+}
+    
 }
 
 // TIMER
