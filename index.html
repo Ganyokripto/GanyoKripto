@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GanyoDigital | Fast Data Services</title>
+    <title>GanyoDigital | Fast Affordable Data Services</title>
     
     <!-- Tab Icon -->
     <link rel="icon" type="image/png" href="Logo.png">
@@ -165,7 +165,7 @@
         localStorage.setItem('ganyoCount', orderCount);
         document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-        let formatted = phone.startsWith('0') ? phone.substring(1) : phone;
+        let formatted = phone.startsWith('') ? phone.substring(1) : phone;
         
         const msg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📦 *Bundle:* ${activePkg}%0A💰 *Price:* GHS ${activePrice}%0A📱 *Recipient:* ${formatted}%0A----------------------`;
         
@@ -174,7 +174,7 @@
 
     function shareWebsite() {
         const shareData = {
-            title: 'GanyoDigital - Fast Data',
+            title: 'GanyoDigital - Affordable Fast & Reliable Data',
             text: 'Buy affordable MTN, Telecel & AirtelTigo data here:',
             url: 'https://github.com/Ganyokripto/GanyoDigital'
         };
@@ -208,7 +208,7 @@
         <img src="Logo.png" alt="Logo" style="width: 30px; vertical-align: middle; margin-right: 5px;">
         <span style="color: var(--primary); font-weight: bold; letter-spacing: 1px; font-size: 1.2rem;">GANYODATA</span>
     </div>
-    <div style="font-size: 0.9rem; font-weight: 500;">
+    <div style="font-size: 1.0rem; font-weight: 500;">
         GanyoData @2026 | Powered By 
         <a href="https://ganyokripto.github.io/Ecosystem/" style="color: var(--primary); text-decoration: none; font-weight: bold;">GanyoKripto</a>
     </div>
