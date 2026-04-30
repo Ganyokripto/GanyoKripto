@@ -6,7 +6,6 @@
     <title>GanyoDigital | Fast Affordable Data Services</title>
     
     <link rel="icon" type="image/png" href="Logo.png">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
@@ -52,7 +51,6 @@
         <strong style="font-size: 1.5rem; color: #000;" id="momoNumber">0242366444</strong>
         <span style="display: block; font-size: 0.9rem; color: var(--primary); font-weight: bold;">Michael .A. Believe</span>
     </div>
-    <p style="margin-top: 10px; font-size: 0.85rem; color: #d9534f; font-weight: bold;">⚠️ Please use 1 as the Reference!</p>
 </section>
 
 <section class="order-section">
@@ -75,14 +73,12 @@
 </div>
 
 <footer style="background-color: #fff; color: #666; padding: 40px 20px; text-align: center; border-top: 3px solid var(--accent); margin-top: 30px;">
-    <span style="color: var(--primary); font-weight: bold; font-size: 1.2rem;">GANYODATA @2026</span>
+    <span style="color: var(--primary); font-weight: bold; font-size: 1.2rem;">GANYODATA @2026 | Powered by GanyoKripto</span>
 </footer>
 
 <a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank" class="whatsapp-float">
    <img src="ganyodata.png" alt="Join Group">
 </a>
-
-<iframe name="sms_frame" style="display:none;"></iframe>
 
 <script>
     const dataStore = {
@@ -114,45 +110,26 @@
 
     function sendOrder() {
         const phone = document.getElementById('orderPhone').value;
-        if (!activePkg || !phone) { alert("Please select a bundle and enter your number!"); return; }
+        if (!activePkg || !phone) { alert("Select bundle and enter number!"); return; }
 
-        // --- THE RELIABLE SMS TRIGGER ---
+        // --- SMS TRIGGER (MATCHED TO JAVA LOGIC) ---
         const apiURL = "https://sms.gonlinesites.com/app/sms/api";
-        const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw==";
+        const apiKey = "R2FueW9EYXRhOkFtZW5yYWgxPw=="; 
+        const senderID = "GanyoData";
         const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) has been received and is being processed. Thanks for choosing GanyoData!`;
 
-        // We create a temporary form and submit it to the hidden iframe
-        const form = document.createElement("form");
-        form.method = "GET";
-        form.action = apiURL;
-        form.target = "sms_frame";
+        // Exact parameters from your Java code
+        const finalUrl = `${apiURL}?action=send-sms&api_key=${encodeURIComponent(apiKey)}&to=${encodeURIComponent(phone)}&from=${encodeURIComponent(senderID)}&sms=${encodeURIComponent(smsMsg)}`;
 
-        const params = {
-            key: apiKey,
-            type: "text",
-            contacts: phone,
-            senderid: "GanyoData",
-            msg: smsMsg
-        };
+        // Use sendBeacon for a reliable background call
+        navigator.sendBeacon(finalUrl);
 
-        for (const key in params) {
-            const input = document.createElement("input");
-            input.type = "hidden";
-            input.name = key;
-            input.value = params[key];
-            form.appendChild(input);
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-
-        // Update Counter
+        // UI Update
         orderCount++;
         localStorage.setItem('ganyoCount', orderCount);
         document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-        // WhatsApp Redirect
+        // WhatsApp
         const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📦 *Bundle:* ${activePkg}%0A💰 *Price:* GHS ${activePrice}%0A📱 *Recipient:* ${phone}%0A----------------------`;
         window.open("https://wa.me/233505332010?text=" + waMsg);
     }
