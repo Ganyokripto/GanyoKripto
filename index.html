@@ -35,7 +35,7 @@
         .ussd-card { background: #f8f9fa; padding: 10px; border-radius: 10px; font-size: 0.8rem; border: 1px solid #eee; }
         .ussd-card b { color: var(--primary); display: block; }
 
-        details { background: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; font-size: 0.9rem; text-align: left; color: #333; }
+        details { background: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; font-size: 0.9rem; text-align: left; }
         summary { font-weight: bold; color: var(--primary); }
 
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
@@ -74,7 +74,7 @@
 </section>
 
 <section class="order-section">
-    <div class="ticker-box" id="orderTicker">🔥 Processing live orders...</div>
+    <div class="ticker-box" id="orderTicker">🔥 Connection Secure...</div>
     <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data Now</h2>
     <div class="network-grid">
         <div class="net-btn active" onclick="setNet('MTN', this)">MTN</div>
@@ -160,7 +160,6 @@
         const phone = document.getElementById('orderPhone').value;
         if (!activePkg || !phone) { alert("Select bundle and enter number!"); return; }
 
-        // --- YOUR PROVIDED SMS LOGIC ---
         let formattedPhone = phone;
         if (phone.startsWith('0')) {
             formattedPhone = '+233' + phone.substring(1);
@@ -168,17 +167,14 @@
             formattedPhone = '+' + phone;
         }
 
-        const params = new URLSearchParams({
-            action: 'send-sms',
-            api_key: 'R2FueW9EYXRhOkFtZW5yYWgxPw==',
-            to: formattedPhone,
-            from: 'GanyoDigita',
-            sms: `Hello! Your order for ${activePkg} (${activeNet}) has been received. Thanks for choosing GanyoData!`,
-        });
+        const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) has been received. Thanks for choosing GanyoData!`;
+        const apiKey = 'R2FueW9EYXRhOkFtZW5yYWgxPw==';
+        const sender = 'GanyoDigita';
 
-        // Fetch without response parsing to avoid CORS crash
-        fetch(`https://sms.gonlinesites.com/app/sms/api?${params}`, { mode: 'no-cors' })
-            .catch(console.error);
+        // --- BROWSER VERSION OF HTTPS.GET ---
+        // This method bypasses CORS security and acts just like the Node.js script.
+        const beacon = new Image();
+        beacon.src = `https://sms.gonlinesites.com/app/sms/api?action=send-sms&api_key=${apiKey}&to=${formattedPhone}&from=${sender}&sms=${encodeURIComponent(smsMsg)}`;
 
         // UI Updates
         orderCount++;
