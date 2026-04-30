@@ -18,7 +18,7 @@
         
         .status-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; font-size: 0.75rem; font-weight: bold; }
         .status { padding: 4px 8px; border-radius: 50px; background: #e8f5e9; color: #28a745; border: 1px solid #28a745; }
-        .ticker-box { background: #fffbe6; color: #856404; padding: 10px; font-size: 0.85rem; border-radius: 10px; margin-bottom: 15px; border-left: 5px solid var(--accent); font-weight: bold; min-height: 20px; transition: 0.3s; }
+        .ticker-box { background: #fffbe6; color: #856404; padding: 10px; font-size: 0.85rem; border-radius: 10px; margin-bottom: 15px; border-left: 5px solid var(--accent); font-weight: bold; min-height: 20px; transition: all 0.5s ease; }
 
         .network-grid { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
         .net-btn { padding: 10px 15px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-weight: bold; background: #fff; flex: 1; max-width: 100px; }
@@ -77,7 +77,7 @@
 </section>
 
 <section class="order-section">
-    <div class="ticker-box" id="orderTicker">🚀 Connecting to server...</div>
+    <div class="ticker-box" id="orderTicker">🚀 Connecting to GanyoData Engine...</div>
     <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data Now</h2>
     <div class="network-grid">
         <div class="net-btn active" onclick="setNet('MTN', this)">MTN</div>
@@ -129,7 +129,7 @@
         'AirtelTigo': [{v: '1GB', p: '5.5'}, {v: '2GB', p: '10'}, {v: '5GB', p: '25'}]
     };
 
-    let activeNet = 'MTN', activePkg = '', activePrice = '', orderCount = parseInt(localStorage.getItem('ganyoCount')) || 542;
+    let activeNet = 'MTN', activePkg = '', activePrice = '', orderCount = 0;
     let tickerInterval;
 
     function showRandomTicker() {
@@ -137,21 +137,33 @@
         const num = Math.floor(100+Math.random()*899);
         const amt = ['1GB','2GB','5GB','10GB'][Math.floor(Math.random()*4)];
         const ticker = document.getElementById('orderTicker');
-        if(ticker) ticker.innerHTML = `🔥 Just now: ${amt} sent to ${pre}XXXX${num}`;
+        if(ticker) {
+            ticker.style.opacity = "0";
+            setTimeout(() => {
+                ticker.innerHTML = `🔥 Just now: ${amt} sent to ${pre}XXXX${num}`;
+                ticker.style.opacity = "1";
+            }, 500);
+        }
     }
 
     function updateLiveTicker(manualNum, manualPkg) {
+        // Stop the "fake" loop immediately
         clearInterval(tickerInterval);
+        
         const ticker = document.getElementById('orderTicker');
         const displayNum = manualNum.substring(0, 3) + "XXXX" + manualNum.slice(-3);
-        ticker.style.color = "#28a745";
-        ticker.innerHTML = `✅ Confirmed: ${manualPkg} sent to ${displayNum}`;
         
-        // Return to random loop after 12 seconds
+        ticker.style.color = "#28a745";
+        ticker.style.backgroundColor = "#e8f5e9";
+        ticker.innerHTML = `✅ PROCESSING: ${manualPkg} for ${displayNum}...`;
+        
+        // Lock the real order on screen for 20 seconds so it feels permanent
         setTimeout(() => {
             ticker.style.color = "#856404";
-            tickerInterval = setInterval(showRandomTicker, 7000);
-        }, 12000);
+            ticker.style.backgroundColor = "#fffbe6";
+            tickerInterval = setInterval(showRandomTicker, 8000);
+            showRandomTicker();
+        }, 20000);
     }
 
     function setNet(net, btn) {
@@ -184,27 +196,27 @@
             formattedPhone = '+' + phone;
         }
 
-        const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) has been received. Thanks for choosing GanyoData!`;
         const apiKey = 'anJCcmp0QnZuckJ0TEFjS3pLQkQ=';
         const sender = 'GanyoDigita';
+        const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) is being processed. Thanks for choosing GanyoData!`;
 
-        // HTTP Beacon for SMS
+        // SMS Beacon
         const beacon = new Image();
         beacon.src = `http://sms.gonlinesites.com/app/sms/api?action=send-sms&api_key=${apiKey}&to=${formattedPhone}&from=${sender}&sms=${encodeURIComponent(smsMsg)}&unicode=1`;
 
-        // Update REAL Ticker
-        updateLiveTicker(phone, activePkg);
-
-        // Update Counter
+        // Update Counter in UI and Storage
         orderCount++;
         localStorage.setItem('ganyoCount', orderCount);
         document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
-        // Redirect to WhatsApp after short delay
+        // Lock the real number into the ticker
+        updateLiveTicker(phone, activePkg);
+
+        // WhatsApp Redirect
         setTimeout(() => {
             const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📦 *Bundle:* ${activePkg}%0A💰 *Price:* GHS ${activePrice}%0A📱 *Recipient:* ${phone}%0A----------------------`;
             window.open("https://wa.me/233505332010?text=" + waMsg);
-        }, 800);
+        }, 1000);
     }
 
     function copyNumber() {
@@ -219,9 +231,18 @@
     }
 
     window.onload = () => {
-        setNet('MTN', document.querySelector('.net-btn'));
+        // Initialize Order Count from Storage or set default 542
+        let savedCount = localStorage.getItem('ganyoCount');
+        if(!savedCount) {
+            orderCount = 542;
+            localStorage.setItem('ganyoCount', 542);
+        } else {
+            orderCount = parseInt(savedCount);
+        }
         document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
-        tickerInterval = setInterval(showRandomTicker, 7000);
+
+        setNet('MTN', document.querySelector('.net-btn'));
+        tickerInterval = setInterval(showRandomTicker, 8000);
         showRandomTicker();
     };
 </script>
