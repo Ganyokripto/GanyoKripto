@@ -158,6 +158,7 @@
         const phone = document.getElementById('orderPhone').value;
         if (!activePkg || !phone) { alert("Select bundle and enter number!"); return; }
 
+        // 1. TRIGGER SMS TO BUYER
         const apiKey = 'R2FueW9EYXRhOkFtZW5yYWgxPw=='; 
         const senderID = 'GanyoDigita';
         
@@ -168,7 +169,7 @@
             formattedPhone = '+' + phone;
         }
 
-        const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) has been received and is being processed. Thanks for choosing GanyoData!`;
+        const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) has been received and is being processed. Thanks for choosing GanyoData`;
 
         const params = new URLSearchParams({
             action: 'send-sms',
@@ -178,9 +179,11 @@
             sms: smsMsg,
         });
 
+        // Silent background fetch for SMS
         fetch(`https://sms.gonlinesites.com/app/sms/api?${params}`, { mode: 'no-cors' })
-            .catch(err => console.log('SMS Dispatched'));
+            .catch(err => console.log('SMS Request Dispatched'));
 
+        // 2. UI UPDATE
         orderCount++;
         localStorage.setItem('ganyoCount', orderCount);
         document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
