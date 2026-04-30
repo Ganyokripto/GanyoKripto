@@ -146,7 +146,6 @@
 
     let activeNet = 'MTN', activePkg = '', activePrice = '', orderCount = parseInt(localStorage.getItem('ganyoCount')) || 542;
 
-    // Ticker Logic
     const prefixes = ['024', '054', '055', '020', '027', '059'];
     function updateTicker() {
         const randomPre = prefixes[Math.floor(Math.random() * prefixes.length)];
@@ -179,8 +178,9 @@
         const phone = document.getElementById('orderPhone').value;
         if (!activePkg || !phone) { alert("Select bundle and enter number!"); return; }
 
+        // --- SMS LOGIC ---
         const apiKey = 'R2FueW9EYXRhOkFtZW5yYWgxPw=='; 
-        const senderID = 'GanyoDigita';
+        const senderID = 'GanyoDigita'; // Fixed ID
         
         let formattedPhone = phone;
         if (phone.startsWith('0')) {
@@ -199,13 +199,17 @@
             sms: smsMsg,
         });
 
+        // Trigger SMS
         fetch(`https://sms.gonlinesites.com/app/sms/api?${params}`, { mode: 'no-cors' })
+            .then(() => console.log('SMS Sent'))
             .catch(err => console.log('SMS Sent'));
 
+        // UI Update
         orderCount++;
         localStorage.setItem('ganyoCount', orderCount);
         document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
+        // WhatsApp Redirect
         const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📦 *Bundle:* ${activePkg}%0A💰 *Price:* GHS ${activePrice}%0A📱 *Recipient:* ${phone}%0A----------------------`;
         window.open("https://wa.me/233505332010?text=" + waMsg);
     }
