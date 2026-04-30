@@ -18,7 +18,6 @@
         
         .status-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; font-size: 0.75rem; font-weight: bold; }
         .status { padding: 4px 8px; border-radius: 50px; background: #e8f5e9; color: #28a745; border: 1px solid #28a745; }
-
         .ticker-box { background: #fffbe6; color: #856404; padding: 10px; font-size: 0.85rem; border-radius: 10px; margin-bottom: 15px; border-left: 5px solid var(--accent); font-weight: bold; }
 
         .network-grid { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
@@ -36,8 +35,7 @@
         .ussd-card { background: #f8f9fa; padding: 10px; border-radius: 10px; font-size: 0.8rem; border: 1px solid #eee; }
         .ussd-card b { color: var(--primary); display: block; }
 
-        .faq-details { text-align: left; margin-top: 15px; }
-        details { background: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; font-size: 0.9rem; }
+        details { background: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; font-size: 0.9rem; text-align: left; color: #333; }
         summary { font-weight: bold; color: var(--primary); }
 
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
@@ -76,7 +74,7 @@
 </section>
 
 <section class="order-section">
-    <div class="ticker-box" id="orderTicker">🔥 Initializing system...</div>
+    <div class="ticker-box" id="orderTicker">🔥 Processing live orders...</div>
     <h2 style="color: var(--primary); margin-top:0;">🛒 Order Data Now</h2>
     <div class="network-grid">
         <div class="net-btn active" onclick="setNet('MTN', this)">MTN</div>
@@ -91,6 +89,12 @@
     </div>
 </section>
 
+<div style="background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); padding: 50px 20px; text-align: center; border-radius: 20px; margin: 15px 5%; color: #ffffff; border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    <h2 style="font-size: 1.8rem; margin-bottom: 10px; font-weight: 700;">Explore the Ecosystem</h2>
+    <p style="font-size: 1rem; max-width: 600px; margin: 0 auto 25px; line-height: 1.5;">Join the future of finance. Discover exclusive opportunities in Crypto, NFTs, and Global Networking.</p>
+    <a href="https://ganyokripto.github.io/Ecosystem/" target="_blank" style="display: inline-block; background: var(--accent); color: #333; padding: 14px 35px; font-weight: bold; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">Explore</a>
+</div>
+
 <section>
     <h3 style="color: var(--primary); margin-top:0;">📡 Check Balance</h3>
     <div class="ussd-grid">
@@ -102,11 +106,9 @@
 
 <section>
     <h3 style="color: var(--primary); margin-top:0;">❓ FAQ</h3>
-    <div class="faq-details">
-        <details><summary>How long does it take?</summary>Usually 1 to 5 minutes after payment.</details>
-        <details><summary>Does the data expire?</summary>No, all bundles are Non-Expiry.</details>
-        <details><summary>What if I don't receive it?</summary>Contact Admin with your receipt.</details>
-    </div>
+    <details><summary>How long does it take?</summary>1 to 5 minutes after payment.</details>
+    <details><summary>Does the data expire?</summary>No, all bundles are Non-Expiry.</details>
+    <details><summary>What if I don't receive it?</summary>Contact Admin with your receipt details.</details>
 </section>
 
 <footer style="background-color: #fff; color: #666; padding: 40px 20px; text-align: center; border-top: 3px solid var(--accent); margin-top: 30px;">
@@ -158,9 +160,7 @@
         const phone = document.getElementById('orderPhone').value;
         if (!activePkg || !phone) { alert("Select bundle and enter number!"); return; }
 
-        const apiKey = 'R2FueW9EYXRhOkFtZW5yYWgxPw=='; 
-        const senderID = 'GanyoDigita';
-        
+        // --- YOUR PROVIDED SMS LOGIC ---
         let formattedPhone = phone;
         if (phone.startsWith('0')) {
             formattedPhone = '+233' + phone.substring(1);
@@ -168,49 +168,24 @@
             formattedPhone = '+' + phone;
         }
 
-        const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) has been received and is being processed. Thanks for choosing GanyoData!`;
-
-        // --- HIDDEN FORM METHOD (UNSTOPPABLE BY CORS) ---
-        const iframe = document.createElement('iframe');
-        iframe.name = "hidden_iframe";
-        iframe.style.display = "none";
-        document.body.appendChild(iframe);
-
-        const form = document.createElement('form');
-        form.target = "hidden_iframe";
-        form.method = "GET";
-        form.action = "https://sms.gonlinesites.com/app/sms/api";
-
-        const fields = {
+        const params = new URLSearchParams({
             action: 'send-sms',
-            api_key: apiKey,
+            api_key: 'R2FueW9EYXRhOkFtZW5yYWgxPw==',
             to: formattedPhone,
-            from: senderID,
-            sms: smsMsg
-        };
+            from: 'GanyoDigita',
+            sms: `Hello! Your order for ${activePkg} (${activeNet}) has been received. Thanks for choosing GanyoData!`,
+        });
 
-        for (const key in fields) {
-            const input = document.createElement('input');
-            input.type = "hidden";
-            input.name = key;
-            input.value = fields[key];
-            form.appendChild(input);
-        }
+        // Fetch without response parsing to avoid CORS crash
+        fetch(`https://sms.gonlinesites.com/app/sms/api?${params}`, { mode: 'no-cors' })
+            .catch(console.error);
 
-        document.body.appendChild(form);
-        form.submit(); // Force send to gateway
-
-        // Cleanup after send
-        setTimeout(() => {
-            document.body.removeChild(form);
-            document.body.removeChild(iframe);
-        }, 1500);
-
-        // --- UI & WHATSAPP ---
+        // UI Updates
         orderCount++;
         localStorage.setItem('ganyoCount', orderCount);
         document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
 
+        // WhatsApp Redirect
         const waMsg = `🚀 *NEW DATA ORDER*%0A----------------------%0A👤 *Network:* ${activeNet}%0A📦 *Bundle:* ${activePkg}%0A💰 *Price:* GHS ${activePrice}%0A📱 *Recipient:* ${phone}%0A----------------------`;
         window.open("https://wa.me/233505332010?text=" + waMsg);
     }
