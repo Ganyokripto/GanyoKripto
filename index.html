@@ -3,130 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GanyoData | Official</title>
+    <title>GanyoData | Fast Affordable Data Services</title>
+    <link rel="icon" type="image/png" href="Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         :root { --primary: #28a745; --accent: #ffc107; --bg: #28a745; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #fff; padding-bottom: 30px; }
-        header { background: #fff; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        .logo-box { display: flex; align-items: center; color: var(--primary); font-weight: 800; cursor: pointer; font-size: 1.2rem; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #fff; }
+        header { background: #fff; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-box { display: flex; align-items: center; color: var(--primary); font-weight: bold; font-size: 1.2rem; cursor: pointer; }
+        .motto { color: var(--primary); font-weight: bold; font-size: 0.9rem; }
         
-        section { background: #fff; padding: 1.2rem; border-radius: 18px; margin: 15px 4%; color: #333; text-align: center; border: 2px solid var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        section { background: #fff; padding: 1.5rem; border-radius: 20px; margin: 15px 5%; color: #333; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--accent); }
         
-        /* Payment Section */
-        .payment-box { background: #f8f9fa; padding: 12px; border-radius: 12px; border: 2px dashed #28a745; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        /* Admin Panel Styling */
+        #adminPanel { display: none; background: #111; color: #fff; border: 2px solid var(--accent); padding: 20px; text-align: left; }
+        .admin-stat { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
 
-        /* Admin Dashboard */
-        .admin-dashboard { background: #111; color: #fff; margin: 10px 4%; padding: 20px; border-radius: 15px; display: none; border: 2px solid var(--accent); }
-        .admin-stat { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; font-size: 1rem; }
+        .status-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; font-size: 0.75rem; font-weight: bold; }
+        .status { padding: 4px 8px; border-radius: 50px; background: #e8f5e9; color: #28a745; border: 1px solid #28a745; }
+        .ticker-box { background: #fffbe6; color: #856404; padding: 10px; font-size: 0.85rem; border-radius: 10px; margin-bottom: 15px; border-left: 5px solid var(--accent); font-weight: bold; min-height: 20px; transition: all 0.5s ease; }
 
-        /* Network & Packages */
-        .network-grid { display: flex; gap: 8px; margin-bottom: 15px; }
-        .net-btn { padding: 12px; border: 1px solid #eee; border-radius: 10px; cursor: pointer; flex: 1; font-size: 0.9rem; background: #fff; font-weight: bold; transition: 0.2s; }
-        .net-btn.active { background: #e8f5e9; border-color: var(--primary); color: var(--primary); box-shadow: inset 0 0 5px rgba(0,0,0,0.1); }
+        .network-grid { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
+        .net-btn { padding: 10px 15px; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-weight: bold; background: #fff; flex: 1; max-width: 100px; }
+        .net-btn.active { background: #e8f5e9; border-color: var(--primary); color: var(--primary); }
+        
+        .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; }
+        .pkg-btn { padding: 10px 5px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-size: 0.8rem; background: #f9f9f9; transition: 0.2s; }
+        .pkg-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; }
+        
+        input { padding: 12px; width: 100%; max-width: 300px; border-radius: 12px; border: 1px solid #ccc; margin-bottom: 15px; text-align: center; font-size: 1rem; box-sizing: border-box; }
+        .order-btn { background: #25d366; color: white; padding: 15px; border-radius: 50px; border: none; cursor: pointer; width: 100%; max-width: 300px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
 
-        .package-container { max-height: 320px; overflow-y: auto; margin-bottom: 15px; border: 1px solid #eee; border-radius: 12px; padding: 8px; background: #fafafa; }
-        .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .pkg-btn { padding: 12px 2px; border: 1px solid #ddd; border-radius: 10px; cursor: pointer; font-size: 0.8rem; background: #fff; color: #333; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .pkg-btn.active { background: var(--primary); color: white; font-weight: bold; border-color: var(--primary); transform: translateY(-2px); }
+        .ussd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+        .ussd-card { background: #f8f9fa; padding: 10px; border-radius: 10px; font-size: 0.8rem; border: 1px solid #eee; }
+        .ussd-card b { color: var(--primary); display: block; }
 
-        input { padding: 15px; width: 100%; border-radius: 12px; border: 2px solid #ddd; margin-bottom: 12px; text-align: center; box-sizing: border-box; font-size: 1.1rem; font-weight: bold; }
-        .order-btn { background: #25d366; color: white; padding: 18px; border-radius: 50px; border: none; width: 100%; font-weight: bold; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
+        .explore-banner { background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%); padding: 40px 20px; text-align: center; border-radius: 20px; margin: 15px 5%; color: #ffffff; border: 2px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .explore-btn { display: inline-block; background: var(--accent); color: #333; padding: 12px 30px; font-weight: bold; text-decoration: none; border-radius: 50px; margin-top: 15px; }
 
-        /* USSD Section */
-        .ussd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .ussd-card { background: #f8f9fa; padding: 10px; border-radius: 10px; font-size: 0.7rem; border: 1px solid #eee; color: #333; cursor: pointer; }
-        .ussd-card b { color: var(--primary); display: block; font-size: 0.9rem; margin-top: 3px; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+        .whatsapp-float img { width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-box" onclick="checkAccess()">
-        <img src="Logo.png" alt="Logo" style="width: 30px; margin-right: 8px;">
+    <div class="logo-box" onclick="toggleAdmin()">
+        <img src="Logo.png" alt="Logo" style="width: 35px; height: auto; margin-right: 8px;">
         GanyoData
     </div>
-    <div style="color: var(--primary); font-size: 0.75rem; font-weight: 900; letter-spacing: 1px;">OFFICIAL</div>
+    <div class="motto">Powered By: GanyoKripto</div>
 </header>
 
-<!-- ADMIN STATS (PIN PROTECTED) -->
-<div id="adminPanel" class="admin-dashboard">
-    <h3 style="margin:0 0 15px 0; color: var(--accent); text-align: center; border-bottom: 1px solid var(--accent); padding-bottom: 10px;">📈 BUSINESS LEDGER</h3>
-    <div class="admin-stat"><span>Total Orders:</span> <b id="todayOrders">0</b></div>
-    <div class="admin-stat"><span>Total Revenue:</span> <b>GHS <span id="todayRev">0.00</span></b></div>
-    <div class="admin-stat" style="color: #25d366;"><span>Net Profit:</span> <b>GHS <span id="todayProfit">0.00</span></b></div>
-    <button onclick="resetDailyData()" style="width:100%; background:#ff4444; color:white; border:none; padding:12px; border-radius:10px; margin-top:15px; font-weight: bold; cursor: pointer;">RESET ALL DATA</button>
-</div>
+<!-- ADMIN LEDGER SECTION -->
+<section id="adminPanel">
+    <h3 style="color: var(--accent); text-align:center;">📊 BUSINESS LEDGER</h3>
+    <div class="admin-stat"><span>Orders Today:</span> <b id="statOrders">0</b></div>
+    <div class="admin-stat"><span>Total Revenue:</span> <b>GHS <span id="statRev">0.00</span></b></div>
+    <div class="admin-stat" style="color:#25d366;"><span>Net Profit:</span> <b>GHS <span id="statProfit">0.00</span></b></div>
+    <button onclick="resetLedger()" style="width:100%; padding:10px; background:red; color:white; border:none; border-radius:8px; margin-top:10px;">Reset Statistics</button>
+</section>
 
-<!-- TOP PAYMENT BOX -->
+<section id="referral">
+    <h2 style="color: var(--primary); margin-top: 0;"> Refer & Earn</h2>
+    <p>Earn 30p on <strong>every purchase</strong> made by people you refer.</p>
+    <button onclick="shareWebsite()" style="background: var(--primary); color: white; padding: 12px 25px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold;"> Start Earning</button>
+</section>
+
 <section>
-    <div class="payment-box" onclick="copyNum('0242366444')">
-        <div style="text-align: left;"><small style="font-size: 0.7rem; color: #666;">SEND PAYMENT TO:</small><br><strong style="font-size: 1.1rem;">0242366444</strong></div>
-        <div style="text-align: right;"><small style="color: var(--primary); font-weight: 800;">M. A. Believe</small> <i class="fas fa-copy" style="margin-left:5px; color:#aaa;"></i></div>
+    <div class="status-bar">
+        <span class="status">● MTN: Online</span>
+        <span class="status">● Telecel: Online</span>
+        <span class="status">● AirtelTigo: Online</span>
+    </div>
+    <h2 style="color: var(--primary); margin-top: 0;"> Payment Instructions</h2>
+    <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px dashed #ccc; cursor: pointer;" onclick="copyNumber()">
+        <span style="display: block; font-size: 0.8rem; color: #666;">Tap to Copy Number</span>
+        <strong style="font-size: 1.5rem; color: #000;" id="momoNumber">0242366444</strong>
+        <span style="display: block; font-size: 0.9rem; color: var(--primary); font-weight: bold;">Michael .A. Believe</span>
     </div>
 </section>
 
-<!-- MAIN ORDERING BOX -->
-<section>
+<section class="order-section">
+    <div class="ticker-box" id="orderTicker"> Connecting to GanyoData Engine...</div>
+    <h2 style="color: var(--primary); margin-top:0;"> Order Data Now</h2>
     <div class="network-grid">
         <div class="net-btn active" id="btnMTN" onclick="setNet('MTN', this)">MTN</div>
         <div class="net-btn" onclick="setNet('Telecel', this)">Telecel</div>
         <div class="net-btn" onclick="setNet('AirtelTigo', this)">AirtelTigo</div>
     </div>
-    
-    <div class="package-container">
-        <div id="pkgGrid" class="package-grid"></div>
+    <div class="package-grid" id="pkgGrid"></div>
+    <input type="number" id="orderPhone" placeholder="Recipient Number" required>
+    <button class="order-btn" onclick="sendOrder()">Place Order Now</button>
+    <div style="font-size: 0.85rem; color: var(--primary); margin-top: 15px; font-weight: bold;">
+        <i class="fas fa-check-circle"></i> <span id="totalOrders">0</span> Orders Processed
     </div>
-
-    <input type="number" id="orderPhone" placeholder="024XXXXXXX">
-    <button class="order-btn" onclick="sendOrder()"><i class="fab fa-whatsapp"></i> ORDER ON WHATSAPP</button>
 </section>
 
-<!-- USSD BALANCE SECTION -->
-<section style="margin-top: 0;">
-    <h4 style="margin:0 0 12px 0; font-size: 0.9rem; color: #555; text-transform: uppercase;">Check Your Balance</h4>
+<section>
+    <h3 style="color: var(--primary); margin-top:0;"> Check Balance</h3>
     <div class="ussd-grid">
-        <div class="ussd-card" onclick="copyNum('*138#')">MTN<b>*138#</b></div>
-        <div class="ussd-card" onclick="copyNum('*126#')">Telecel<b>*126#</b></div>
-        <div class="ussd-card" onclick="copyNum('*124#')">Airtel<b>*124#</b></div>
+        <div class="ussd-card">MTN <b>*138#</b></div>
+        <div class="ussd-card">Telecel <b>*126#</b></div>
+        <div class="ussd-card">AirtelTigo <b>*124#</b></div>
     </div>
 </section>
+
+<div class="explore-banner">
+    <h2 style="margin: 0;">Explore the Ecosystem</h2>
+    <p>Discover exclusive opportunities in Crypto, NFTs, and Global Networking.</p>
+    <a href="https://ganyokripto.github.io/Ecosystem/" target="_blank" class="explore-btn">Explore</a>
+</div>
+
+<footer style="background-color: #fff; color: #666; padding: 40px 20px; text-align: center; border-top: 3px solid var(--accent); margin-top: 30px;">
+    <span style="color: var(--primary); font-weight: bold; font-size: 1.0rem;">GanyoData ©2026 | Powered by GanyoKripto</span>
+</footer>
+
+<a href="https://chat.whatsapp.com/Dmko91cY4OA93VfBfweaVf" target="_blank" class="whatsapp-float">
+   <img src="ganyodata.png" alt="Join Group">
+</a>
 
 <script>
-    const ADMIN_PIN = "1234"; // <--- YOUR SECRET PIN
-
-    // FULL PRICE DATABASE
+    // THE DATABASE (Now including 12 MTN items)
     const dataStore = {
         'MTN': [
-            {v: '1GB', r: 5.5, w: 3.9}, {v: '2GB', r: 10, w: 7.8}, {v: '3GB', r: 15, w: 11.7},
-            {v: '4GB', r: 20, w: 15.6}, {v: '5GB', r: 25, w: 19.5}, {v: '6GB', r: 30, w: 23.4},
-            {v: '8GB', r: 35, w: 31.2}, {v: '10GB', r: 45, w: 38}, {v: '15GB', r: 68, w: 57},
-            {v: '20GB', r: 88, w: 76}, {v: '25GB', r: 105, w: 95}, {v: '30GB', r: 124, w: 114}
+            {v: '1GB', p: '5.5', w: 3.9}, {v: '2GB', p: '10', w: 7.8}, {v: '3GB', p: '15', w: 11.7},
+            {v: '4GB', p: '20', w: 15.6}, {v: '5GB', p: '25', w: 19.5}, {v: '6GB', p: '30', w: 23.4},
+            {v: '8GB', p: '35', w: 31.2}, {v: '10GB', p: '45', w: 38}, {v: '15GB', p: '68', w: 57},
+            {v: '20GB', p: '88', w: 76}, {v: '25GB', p: '105', w: 95}, {v: '30GB', p: '124', w: 114}
         ],
-        'Telecel': [
-            {v: '1GB', r: 5.5, w: 3.9}, {v: '2GB', r: 10, w: 7.8}, {v: '5GB', r: 25, w: 19.5}
-        ],
-        'AirtelTigo': [
-            {v: '1GB', r: 5.5, w: 3.9}, {v: '2GB', r: 10, w: 7.8}, {v: '5GB', r: 25, w: 19.5}
-        ]
+        'Telecel': [{v: '1GB', p: '5.5', w: 3.9}, {v: '2GB', p: '10', w: 7.8}, {v: '5GB', p: '25', w: 19.5}],
+        'AirtelTigo': [{v: '1GB', p: '5.5', w: 3.9}, {v: '2GB', p: '10', w: 7.8}, {v: '5GB', p: '25', w: 19.5}]
     };
 
-    let activeNet = 'MTN', activePkg = null;
+    let activeNet = 'MTN', activePkg = '', activePrice = '', activeWholesale = 0, orderCount = 0;
+    let tickerInterval;
 
-    // PIN Protection Logic
-    function checkAccess() {
+    // ADMIN LOGIC
+    function toggleAdmin() {
         let pin = prompt("Enter Admin PIN:");
-        if (pin === ADMIN_PIN) {
-            let panel = document.getElementById('adminPanel');
-            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
-            if(panel.style.display === 'block') panel.scrollIntoView({behavior:'smooth'});
-        } else if (pin !== null) {
-            alert("Incorrect PIN");
+        if(pin === "1234") {
+            let p = document.getElementById('adminPanel');
+            p.style.display = (p.style.display === 'block') ? 'none' : 'block';
+            updateAdminUI();
+        } else if(pin !== null) { alert("Wrong PIN"); }
+    }
+
+    function updateAdminUI() {
+        document.getElementById('statOrders').innerText = localStorage.getItem('g_orders') || 0;
+        document.getElementById('statRev').innerText = parseFloat(localStorage.getItem('g_rev') || 0).toFixed(2);
+        document.getElementById('statProfit').innerText = parseFloat(localStorage.getItem('g_profit') || 0).toFixed(2);
+    }
+
+    function resetLedger() {
+        if(confirm("Reset stats?")) {
+            localStorage.setItem('g_orders', 0);
+            localStorage.setItem('g_rev', 0);
+            localStorage.setItem('g_profit', 0);
+            updateAdminUI();
+        }
+    }
+
+    // ORIGINAL TICKER LOGIC
+    function showRandomTicker() {
+        const pre = ['024','055','020','059'][Math.floor(Math.random()*4)];
+        const num = Math.floor(100+Math.random()*899);
+        const amt = ['1GB','2GB','5GB','10GB'][Math.floor(Math.random()*4)];
+        const ticker = document.getElementById('orderTicker');
+        if(ticker) {
+            ticker.style.opacity = "0";
+            setTimeout(() => {
+                ticker.innerHTML = ` Just now: ${amt} sent to ${pre}XXXX${num}`;
+                ticker.style.opacity = "1";
+            }, 500);
         }
     }
 
     function setNet(net, btn) {
-        activeNet = net; activePkg = null;
+        activeNet = net; activePkg = '';
         document.querySelectorAll('.net-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const grid = document.getElementById('pkgGrid');
@@ -134,11 +189,13 @@
         dataStore[net].forEach(item => {
             const d = document.createElement('div');
             d.className = 'pkg-btn';
-            d.innerHTML = `<b>${item.v}</b><br>GHS ${item.r}`;
+            d.innerHTML = `<strong>${item.v}</strong><br>GHS ${item.p}`;
             d.onclick = () => {
                 document.querySelectorAll('.pkg-btn').forEach(p => p.classList.remove('active'));
                 d.classList.add('active');
-                activePkg = item;
+                activePkg = item.v; 
+                activePrice = item.p;
+                activeWholesale = item.w;
             };
             grid.appendChild(d);
         });
@@ -146,42 +203,51 @@
 
     function sendOrder() {
         const phone = document.getElementById('orderPhone').value;
-        if (!activePkg) { alert("Please select a package!"); return; }
-        if (!phone || phone.length < 10) { alert("Please enter a valid phone number!"); return; }
+        if (!activePkg || !phone) { alert("Select bundle and enter number!"); return; }
 
-        // Track Stats
-        const profit = activePkg.r - activePkg.w;
-        localStorage.setItem('g_orders', parseInt(localStorage.getItem('g_orders') || 0) + 1);
-        localStorage.setItem('g_rev', parseFloat(localStorage.getItem('g_rev') || 0) + activePkg.r);
-        localStorage.setItem('g_profit', parseFloat(localStorage.getItem('g_profit') || 0) + profit);
-        updateAdminDisplay();
+        // PROFIT LOGIC (Saves to the Ledger)
+        let orders = parseInt(localStorage.getItem('g_orders') || 0) + 1;
+        let rev = parseFloat(localStorage.getItem('g_rev') || 0) + parseFloat(activePrice);
+        let profit = parseFloat(localStorage.getItem('g_profit') || 0) + (parseFloat(activePrice) - activeWholesale);
+        
+        localStorage.setItem('g_orders', orders);
+        localStorage.setItem('g_rev', rev);
+        localStorage.setItem('g_profit', profit);
 
-        // Redirect to WhatsApp
-        const text = `🚀 *NEW ORDER - GANYODATA*%0A--------------------------%0A*Network:* ${activeNet}%0A*Package:* ${activePkg.v}%0A*Price:* GHS ${activePkg.r}%0A*Recipient:* ${phone}%0A--------------------------`;
-        window.open(`https://wa.me/233505332010?text=${text}`);
+        // SMS BEACON
+        let formattedPhone = phone.startsWith('0') ? '+233' + phone.substring(1) : phone;
+        const apiKey = 'anJCcmp0QnZuckJ0TEFjS3pLQkQ=';
+        const smsMsg = `Hello! Your order for ${activePkg} (${activeNet}) is being processed. Thanks for choosing GanyoData!`;
+        new Image().src = `http://sms.gonlinesites.com/app/sms/api?action=send-sms&api_key=${apiKey}&to=${formattedPhone}&from=GanyoDigita&sms=${encodeURIComponent(smsMsg)}&unicode=1`;
+
+        // Update Total Count
+        orderCount++;
+        localStorage.setItem('ganyoCount', orderCount);
+        document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
+
+        // WHATSAPP
+        const waMsg = ` *NEW DATA ORDER*%0A----------------------%0A *Network:* ${activeNet}%0A *Bundle:* ${activePkg}%0A *Price:* GHS ${activePrice}%0A *Recipient:* ${phone}%0A----------------------`;
+        window.open("https://wa.me/233505332010?text=" + waMsg);
     }
 
-    function updateAdminDisplay() {
-        document.getElementById('todayOrders').innerText = localStorage.getItem('g_orders') || 0;
-        document.getElementById('todayRev').innerText = parseFloat(localStorage.getItem('g_rev') || 0).toFixed(2);
-        document.getElementById('todayProfit').innerText = parseFloat(localStorage.getItem('g_profit') || 0).toFixed(2);
+    function copyNumber() {
+        navigator.clipboard.writeText("0242366444");
+        alert("Number Copied!");
     }
 
-    function resetDailyData() {
-        if(confirm("This will permanently clear your daily profit stats. Continue?")) {
-            localStorage.clear();
-            location.reload();
-        }
-    }
-
-    function copyNum(num) {
-        navigator.clipboard.writeText(num);
-        alert("Copied: " + num);
+    function shareWebsite() {
+        const shareData = { title: 'GanyoData', url: window.location.href };
+        if (navigator.share) { navigator.share(shareData); } else { alert("Link: " + shareData.url); }
     }
 
     window.onload = () => {
-        updateAdminDisplay();
+        let savedCount = localStorage.getItem('ganyoCount');
+        orderCount = savedCount ? parseInt(savedCount) : 542;
+        document.getElementById('totalOrders').innerText = orderCount.toLocaleString();
+
         setNet('MTN', document.getElementById('btnMTN'));
+        tickerInterval = setInterval(showRandomTicker, 8000);
+        showRandomTicker();
     };
 </script>
 </body>
